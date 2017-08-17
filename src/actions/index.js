@@ -3,3 +3,4 @@
 * in components.
 */
 export * from './NavigationActions';
+export * from './AuthActions';

@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
-import { Button } from './common/Button';
+import { CardButton } from './common/CardButton';
 import { mainNavigation } from '../actions';
 import { colorStyles } from '../styles';
 
@@ -22,22 +22,22 @@ class LoginScreen extends Component {
     const { navigation } = this.props;
     return (
         <View style={styles.mainHolder}>
-          <Button onPress={() => this.props.mainNavigation()}>
+          <CardButton onPress={() => navigation.navigate('LoginForm')}>
             {this.formatMessage(
               {
                 id: "login.label",
                 defaultMessage: "Login"
               })
             }
-          </Button>
-          <Button onPress={() => navigation.navigate('Register')}>
+          </CardButton>
+          <CardButton onPress={() => navigation.navigate('Register')}>
             {this.formatMessage(
               {
                 id: "register.button.label",
                 defaultMessage: "Register"
               })
             }
-          </Button>
+          </CardButton>
         </View>
     );
   }

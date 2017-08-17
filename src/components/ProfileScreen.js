@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { Button } from './common/Button';
+import { CardButton } from './common/CardButton';
 import { loginNavigation } from '../actions';
 import { colorStyles, textStyles } from '../styles';
 
@@ -26,14 +26,14 @@ class ProfileScreen extends Component {
             defaultMessage={'Profile'}
             />
         </Text>
-        <Button onPress={() => this.props.loginNavigation()}>
+        <CardButton onPress={() => this.props.loginNavigation()}>
           {this.formatMessage(
             {
               id: "logout.label",
               defaultMessage: "Logout"
             })
           }
-        </Button>
+        </CardButton>
       </View>
     );
   }

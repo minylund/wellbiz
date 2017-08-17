@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NativeModules, Platform, Text } from 'react-native';
 import { Provider } from 'react-redux';
+import firebase from 'firebase';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { addLocaleData, IntlProvider } from 'react-intl';
@@ -17,6 +18,20 @@ const translations = {
 };
 
 class App extends Component {
+
+  componentWillMount() {
+    const config = {
+      apiKey: "AIzaSyAQtF_ix7IlPxX9rwEvRC_Ivkda7axApEk",
+      authDomain: "wellbiz-9b448.firebaseapp.com",
+      databaseURL: "https://wellbiz-9b448.firebaseio.com",
+      projectId: "wellbiz-9b448",
+      storageBucket: "wellbiz-9b448.appspot.com",
+      messagingSenderId: "464378008028"
+    };
+    firebase.initializeApp(config);
+  }
+
+
 
   constructor(props) {
     super(props);
