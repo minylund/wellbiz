@@ -5,22 +5,22 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import fiLocale from 'react-intl/locale-data/fi';
-import svLocale from 'react-intl/locale-data/sv';
+import enLocale from 'react-intl/locale-data/en';
 import AppNavigation from './src/navigation/AppNavigation';
 import reducers from './src/reducers';
 import FI_MESSAGES from './assets/strings/fi_FI.json';
-import SV_MESSAGES from './assets/strings/sv_SE.json';
+import EN_MESSAGES from './assets/strings/en_EN.json';
 
 const translations = {
   fi: FI_MESSAGES,
-  sv: SV_MESSAGES,
+  en: EN_MESSAGES,
 };
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    addLocaleData([...fiLocale, ...svLocale]);
+    addLocaleData([...fiLocale, ...enLocale]);
   }
 
   getLocale () {

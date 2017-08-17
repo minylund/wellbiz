@@ -2,7 +2,6 @@
 import { TabNavigator } from 'react-navigation';
 import MainScreen from '../components/MainScreen';
 import ProfileScreen from '../components/ProfileScreen';
-import TestScreen from '../components/TestScreen';
 import { colorStyles, textStyles } from '../styles';
 
 
@@ -10,7 +9,6 @@ import { colorStyles, textStyles } from '../styles';
    {
      Main: { screen: MainScreen },
      Profile: { screen: ProfileScreen },
-     Test: { screen: TestScreen },
    },
    {
      tabBarOptions: {

@@ -5,8 +5,8 @@
     "slug": "wellbiz",
     "privacy": "public",
     "sdkVersion": "19.0.0",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "version": "0.0.1",
+    "orientation": "landscape",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app-icon.png",
     "loading": {

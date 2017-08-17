@@ -38,14 +38,6 @@ class LoginScreen extends Component {
               })
             }
           </Button>
-          <Button onPress={() => navigation.navigate('Test')}>
-            {this.formatMessage(
-              {
-                id: "test.button.label",
-                defaultMessage: "Test view"
-              })
-            }
-          </Button>
         </View>
     );
   }
