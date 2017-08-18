@@ -5,15 +5,15 @@ import LoginForm from '../components/LoginForm';
 import RegisterScreen from '../components/RegisterScreen';
 
  const LoginNavigation = StackNavigator({
-   Login: { screen: LoginScreen },
    LoginForm: { screen: LoginForm },
+   Login: { screen: LoginScreen },
    Register: { screen: RegisterScreen },
  },
  {
    navigationOptions: {
      header: null,
    },
-   initialRouteName: 'Login',
+   initialRouteName: 'LoginForm',
  }
 );
 

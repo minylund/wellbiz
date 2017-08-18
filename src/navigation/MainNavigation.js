@@ -1,11 +1,13 @@
 //import React from 'react';
-import { TabNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
+//import { TabNavigator } from 'react-navigation';
 import MainScreen from '../components/MainScreen';
 import ProfileScreen from '../components/ProfileScreen';
+import RegisterScreen from '../components/RegisterScreen';
 import { colorStyles, textStyles } from '../styles';
 
 
- const MainNavigation = TabNavigator(
+ /*const MainNavigation = TabNavigator(
    {
      Main: { screen: MainScreen },
      Profile: { screen: ProfileScreen },
@@ -34,6 +36,18 @@ import { colorStyles, textStyles } from '../styles';
      tabBarPosition: 'bottom',
      //lazy: true,
    },
- );
+ );*/
+
+  const MainNavigation = StackNavigator({
+   Main: { screen: MainScreen },
+   Survey: { screen: RegisterScreen }
+ },
+ {
+   navigationOptions: {
+     header: null,
+   },
+   initialRouteName: 'Survey',
+ }
+);
 
  export default MainNavigation;

@@ -27,7 +27,7 @@ class RegisterScreen extends Component {
 
     RegisterScreen.navigationOptions.title = this.formatMessage({
       id: "register.label",
-      defaultMessage: "Register"
+      defaultMessage: "Survey_test"
      });
   }
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, Input, CardButton, CardSection, Spinner } from './common';
+import { colorStyles } from '../styles';
 
 class LoginForm extends Component {
 
@@ -33,8 +35,7 @@ class LoginForm extends Component {
 
    render() {
      return (
-       <Image source={{ uri: 'https://media.giphy.com/media/hcrfSTtvl93cA/giphy.gif' }} style={{ flex: 1 }}>
-         <Card>
+         <View style={styles.mainHolder}>
           <CardSection>
             <Input
               label={'Email'}
@@ -61,13 +62,20 @@ class LoginForm extends Component {
           <CardSection>
             {this.renderButton()}
           </CardSection>
-        </Card>
-    </Image>
+        </View>
      );
    }
 }
 
 const styles = {
+  mainHolder: {
+    flex: 1,
+    backgroundColor: colorStyles.brand.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+  },
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',

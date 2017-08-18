@@ -3,18 +3,21 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Platform } from 'react-native';
 import { FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
+import { CardButton } from './common/CardButton';
 
 class MainScreen extends Component {
 
   render() {
     return (
       <View style={styles.mainHolder}>
-        <Text style={styles.title}>
-          <FormattedMessage
-            id="main.label"
-            defaultMessage={'Main'}
-            />
-        </Text>
+          <CardButton onPress={() => navigation.navigate('Survey')}>
+            {this.formatMessage(
+              {
+                id: "register.button.label",
+                defaultMessage: "survey"
+              })
+            }
+          </CardButton>
       </View>
     );
   }
