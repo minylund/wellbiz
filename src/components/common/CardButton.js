@@ -8,6 +8,7 @@ const CardButton = ({ onPress, children }) => {
     <TouchableOpacity
       onPress={onPress}
       style={buttonStyle}
+      activeOpacity={0.5}
     >
       <Text style={textStyle}>
         {children}
@@ -19,21 +20,21 @@ const CardButton = ({ onPress, children }) => {
 const styles = {
   textStyle: {
     alignSelf: 'center',
-    color: '#007aff',
-    fontSize: 16,
+    color: '#222',
+    fontSize: 18,
     fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 10
+    lineHeight: 70
   },
   buttonStyle: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#007aff',
+    height: 70,
+    width: 300,
+    backgroundColor: '#eee',
+    borderRadius: 10,
+    borderWidth: 0,
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
+    marginTop: 5,
+    marginBottom: 5
   }
 };
 
