@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import { View, ActivityIndicator, StyleSheet, Text } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
@@ -46,7 +46,7 @@ class SplashScreen extends Component {
               defaultMessage={'Splash'}
               />
           </Text>
-          <ActivityIndicator size="large" />
+          <Image source={{ uri: 'https://www.rock.com/assets/products/311792/large/batman-yellow-logo-button-bdc0043.jpg' }} style={styles.logo} />
         </View>
     )
   }
@@ -74,6 +74,11 @@ const styles = StyleSheet.create({
   text: {
     ...textStyles.title,
     fontSize: 32,
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    marginBottom: 10,
   },
 });
 

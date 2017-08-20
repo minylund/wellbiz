@@ -1,6 +1,6 @@
 
 export const typographyStyles = {
   primaryFont: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Times New Roman',
   },
 };

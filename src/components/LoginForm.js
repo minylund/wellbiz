@@ -36,30 +36,31 @@ class LoginForm extends Component {
    render() {
      return (
          <View style={styles.mainHolder}>
-          <CardSection>
-            <Input
-              label={'Email'}
-              placeholder={'email@gmail.com'}
-              onChangeText={this.onEmailChange.bind(this)}
-              value={this.props.email}
-            />
-          </CardSection>
+          <Image source={{ uri: 'https://www.rock.com/assets/products/311792/large/batman-yellow-logo-button-bdc0043.jpg' }} style={styles.logo} />
+          <View style={styles.authHolder}>
+            <CardSection>
+              <Input
+                placeholder={'User ID'}
+                onChangeText={this.onEmailChange.bind(this)}
+                value={this.props.email}
+              />
+            </CardSection>
 
-          <CardSection>
-            <Input
-              secureTextEntry
-              label={'Password'}
-              placeholder={'password'}
-              onChangeText={this.onPasswordChange.bind(this)}
-              value={this.props.password}
-            />
-          </CardSection>
+            <CardSection>
+              <Input
+                secureTextEntry
+                placeholder={'Password'}
+                onChangeText={this.onPasswordChange.bind(this)}
+                value={this.props.password}
+              />
+            </CardSection>
+          </View>
 
           <Text style={styles.errorTextStyle}>
             {this.props.error}
           </Text>
 
-          <CardSection>
+          <CardSection style={styles.loginButton}>
             {this.renderButton()}
           </CardSection>
         </View>
@@ -73,13 +74,27 @@ const styles = {
     backgroundColor: colorStyles.brand.primary,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     padding: 16,
+  },
+  authHolder: {
+    flex: 1,
+    backgroundColor: colorStyles.brand.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: 80,
+  },
+  logo: {
+    width: 70,
+    height: 70,
+    marginTop: 50,
   },
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
+  },
+  loginButton: {
+    marginBottom: 50,
   }
 };
 
