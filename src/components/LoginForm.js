@@ -28,7 +28,7 @@ class LoginForm extends Component {
 
     return (
       <CardButton onPress={this.onButtonPress.bind(this)}>
-        Login
+        LOGIN
       </CardButton>
   );
   }
@@ -94,7 +94,7 @@ const styles = {
     color: 'red'
   },
   loginButton: {
-    marginBottom: 50,
+    marginBottom: 200,
   }
 };
 

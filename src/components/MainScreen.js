@@ -1,11 +1,25 @@
 //@flow
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Platform } from 'react-native';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
 import { CardButton } from './common/CardButton';
 
 class MainScreen extends Component {
+  static navigationOptions = {
+    title: 'Main'
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.formatMessage = this.props.intl.formatMessage.bind(this);
+
+    MainScreen.navigationOptions.title = this.formatMessage({
+      id: "main.label",
+      defaultMessage: "Menu"
+     });
+  }
 
   render() {
     return (
@@ -13,7 +27,7 @@ class MainScreen extends Component {
           <CardButton onPress={() => navigation.navigate('Survey')}>
             {this.formatMessage(
               {
-                id: "register.button.label",
+                id: "survey.button.label",
                 defaultMessage: "survey"
               })
             }
@@ -23,7 +37,10 @@ class MainScreen extends Component {
   }
 }
 
-export default MainScreen;
+let injectMainScreen = injectIntl(MainScreen);
+Object.assign(injectMainScreen, MainScreen);
+
+export default injectMainScreen;
 
 const styles = StyleSheet.create({
   mainHolder: {

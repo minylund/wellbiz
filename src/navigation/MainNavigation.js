@@ -46,7 +46,7 @@ import { colorStyles, textStyles } from '../styles';
    navigationOptions: {
      header: null,
    },
-   initialRouteName: 'Survey',
+   initialRouteName: 'Main',
  }
 );
 

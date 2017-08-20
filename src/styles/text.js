@@ -28,6 +28,13 @@ export const textStyles = {
       fontWeight: 'bold',
       fontSize: 14,
     },
+    button: {
+      ...typographyStyles.primaryFont,
+      fontWeight: 'bold',
+      alignSelf: 'center',
+      color: '#222',
+      fontSize: 18,
+    },
     data: {
     ...typographyStyles.primaryFont,
       fontSize: 25,
