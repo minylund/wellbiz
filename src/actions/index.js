@@ -4,3 +4,4 @@
 */
 export * from './NavigationActions';
 export * from './AuthActions';
+export * from './MainScreenActions';
