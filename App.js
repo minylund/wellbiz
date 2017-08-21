@@ -11,6 +11,7 @@ import AppNavigation from './src/navigation/AppNavigation';
 import reducers from './src/reducers';
 import FI_MESSAGES from './assets/strings/fi_FI.json';
 import EN_MESSAGES from './assets/strings/en_EN.json';
+import { Font } from 'expo';
 
 const translations = {
   fi: FI_MESSAGES,
@@ -18,6 +19,9 @@ const translations = {
 };
 
 class App extends Component {
+  state = {
+    fontLoaded: false,
+  };
 
   componentWillMount() {
     const config = {
@@ -29,7 +33,13 @@ class App extends Component {
       messagingSenderId: "464378008028"
     };
     firebase.initializeApp(config);
+    Font.loadAsync({
+      'RobotoSlab-Regular': require('./assets/fonts/RobotoSlab-Regular.ttf'),
+      'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
+      'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
+    });
   }
+
 
 
 

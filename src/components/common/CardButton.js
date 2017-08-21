@@ -26,13 +26,14 @@ const styles = {
   buttonStyle: {
     height: 70,
     width: 300,
-    backgroundColor: '#fe5',
+    backgroundColor: '#F9DF6E',
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
     marginBottom: 5,
-    borderWidth: 2,
-    borderColor: '#dc3'
+    borderBottomWidth: 5,
+    borderLeftWidth: 5,
+    borderColor: '#ECD263'
   }
 };
 

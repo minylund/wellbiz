@@ -11,32 +11,26 @@ import { typographyStyles } from './typography';
 */
 
 export const textStyles = {
-    paragraph: {
+    headerSmall: {
       ...typographyStyles.primaryFont,
-      color: colorStyles.gray.dark,
-      fontSize: 14,
+      color: colorStyles.text.gray,
+      fontSize: 30,
     },
-    title: {
+    headerBig: {
       ...typographyStyles.primaryFont,
-      color: '#222',
-      fontWeight: 'bold',
-      fontSize: 20,
+      color: colorStyles.text.gray,
+      fontSize: 80,
     },
-    subTitle: {
+    input: {
       ...typographyStyles.primaryFont,
-      color: '#222',
-      fontWeight: 'bold',
-      fontSize: 14,
+      color: colorStyles.text.gray,
+      fontSize: 30,
     },
     button: {
-      ...typographyStyles.primaryFont,
+      ...typographyStyles.buttonFont,
       fontWeight: 'bold',
       alignSelf: 'center',
-      color: '#222',
-      fontSize: 18,
-    },
-    data: {
-    ...typographyStyles.primaryFont,
+      color: colorStyles.text.button,
       fontSize: 25,
-    },
+    }
   };

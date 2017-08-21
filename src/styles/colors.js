@@ -19,4 +19,8 @@ export const colorStyles = {
     trueGray: Color(grayBase).lighten(0.33),
   },
   white: '#fff',
+  text: {
+    button: '#111',
+    gray: '#4A4A4A',
+  }
 };

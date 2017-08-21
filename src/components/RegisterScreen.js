@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
+import { Video } from 'expo';
 
 class RegisterScreen extends Component {
   static navigationOptions = {
@@ -34,6 +35,12 @@ class RegisterScreen extends Component {
   render() {
     return (
         <View style={styles.mainHolder}>
+         <Video
+          source = {{uri :'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'}}
+          ref={this._handleVideoRef}
+          style={styles.videoPlayer}
+          shouldPlay
+        />
           <Text style={styles.text}>
             <FormattedMessage
               id="register.label"
@@ -63,4 +70,8 @@ const styles = StyleSheet.create({
     ...textStyles.title,
     fontSize: 32,
   },
+  videoPlayer: {
+    width: 300,
+    height: 300,
+  }
 });

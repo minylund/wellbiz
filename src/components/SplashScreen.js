@@ -40,13 +40,7 @@ class SplashScreen extends Component {
   render() {
     return (
         <View style={styles.main}>
-          <Text style={styles.text}>
-            <FormattedMessage
-              id="splash.label"
-              defaultMessage={'Splash'}
-              />
-          </Text>
-          <Image source={{ uri: 'https://www.rock.com/assets/products/311792/large/batman-yellow-logo-button-bdc0043.jpg' }} style={styles.logo} />
+          <Image source={require('../../assets/images/wellbiz-logo.png')} style={styles.logo} />
         </View>
     )
   }

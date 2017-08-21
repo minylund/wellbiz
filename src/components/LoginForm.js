@@ -36,7 +36,7 @@ class LoginForm extends Component {
    render() {
      return (
          <View style={styles.mainHolder}>
-          <Image source={{ uri: 'https://www.rock.com/assets/products/311792/large/batman-yellow-logo-button-bdc0043.jpg' }} style={styles.logo} />
+          <Image source={require('../../assets/images/wellbiz-logo.png')} style={styles.logo} />
           <View style={styles.authHolder}>
             <CardSection>
               <Input
@@ -81,7 +81,7 @@ const styles = {
     backgroundColor: colorStyles.brand.primary,
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: 80,
+    paddingTop: 40,
   },
   logo: {
     width: 70,
@@ -94,7 +94,7 @@ const styles = {
     color: 'red'
   },
   loginButton: {
-    marginBottom: 200,
+    marginBottom: 150,
   }
 };
 

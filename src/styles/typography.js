@@ -1,6 +1,12 @@
 
 export const typographyStyles = {
   primaryFont: {
-    fontFamily: 'Times New Roman',
+    fontFamily: 'RobotoSlab-Regular',
+  },
+  secondaryFont: {
+    fontFamily: 'Roboto-Light',
+  },
+  buttonFont: {
+    fontFamily: 'Roboto-Medium',
   },
 };
