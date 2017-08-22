@@ -36,9 +36,25 @@ class MainScreen extends Component {
     this.props.pageDismissed();
   }
 
+  renderBackButton() {
+    return (
+      <TouchableOpacity
+        onPress={ () => this.props.pageDismissed()}
+        style={styles.backButtonHolder}
+        activeOpacity={0.5}
+      >
+        <Image 
+          source={require('../../assets/images/back-button.png')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+    );
+  }
+
   renderExistingSection() {
     return(
       <View style={styles.mainHolder}>
+        {this.renderBackButton()}
         <View style={styles.mainHeadersHolder}>
           <Text style={styles.headerStyle}>
             Old surveys
@@ -90,16 +106,7 @@ class MainScreen extends Component {
         contentContainerStyle={styles.mainHolder}
         scrollEnabled={false}
       >
-        <TouchableOpacity
-          onPress={ () => this.props.pageDismissed()}
-          style={styles.backButtonHolder}
-          activeOpacity={0.5}
-        >
-          <Image 
-            source={require('../../assets/images/back-button.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
+        {this.renderBackButton()}
         <View style={styles.mainHeadersHolder}>
           <Text style={styles.headerStyle}>
             Create a new survey
