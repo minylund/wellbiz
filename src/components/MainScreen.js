@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, View, StyleSheet, Platform, Keyboard, FlatList } from 'react-native';
+import { TouchableOpacity, Image, Text, View, StyleSheet, Platform, Keyboard, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { newSurveyPressed, openExistingSurvey, pageDismissed } from '../actions';
@@ -90,6 +90,16 @@ class MainScreen extends Component {
         contentContainerStyle={styles.mainHolder}
         scrollEnabled={false}
       >
+        <TouchableOpacity
+          onPress={ () => this.props.pageDismissed()}
+          style={styles.backButtonHolder}
+          activeOpacity={0.5}
+        >
+          <Image 
+            source={require('../../assets/images/back-button.png')}
+            style={styles.image}
+          />
+        </TouchableOpacity>
         <View style={styles.mainHeadersHolder}>
           <Text style={styles.headerStyle}>
             Create a new survey
@@ -280,5 +290,10 @@ const styles = StyleSheet.create({
     ...textStyles.headerBig,
     textAlign: 'center',
     lineHeight: 65,
+  },
+  backButtonHolder: {
+    marginTop: 10,
+    width: 60,
+    height: 60
   },
 });
