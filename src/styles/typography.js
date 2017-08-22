@@ -9,4 +9,10 @@ export const typographyStyles = {
   buttonFont: {
     fontFamily: 'Roboto-Medium',
   },
+  dateFont: {
+    fontFamily: 'RobotoSlab-Bold',
+  },
+  listButton: {
+    fontFamily: 'Roboto-Black',
+  },
 };

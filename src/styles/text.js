@@ -37,5 +37,11 @@ export const textStyles = {
       alignSelf: 'center',
       color: colorStyles.text.button,
       fontSize: 25,
-    }
+    },
+    listItem: {
+      ...typographyStyles.secondaryFont,
+      color: colorStyles.black,
+      fontSize: 23,
+      lineHeight: 70,
+    },
   };

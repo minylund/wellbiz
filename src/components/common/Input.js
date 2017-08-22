@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, Text } from 'react-native';
-import { textStyles } from '../../styles';
+import { colorStyles, textStyles } from '../../styles';
 import FloatingLabel from 'react-native-floating-labels';
 
 const Input = ({ value, autoFocus, returnKeyType, onChangeText, onSubmitEditing, placeholder, secureTextEntry, keyboardType }) => {
@@ -44,9 +44,9 @@ const styles = {
     marginBottom: 40
   },
   borderStyle: {
-    height: 2,
+    height: 1,
     width: 480,
-    backgroundColor: "#ddd",
+    backgroundColor: colorStyles.border.dark,
   },
 };
 

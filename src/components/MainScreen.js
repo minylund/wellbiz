@@ -1,11 +1,12 @@
 //@flow
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Platform, Keyboard } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, Platform, Keyboard, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { newSurveyPressed, openExistingSurvey, pageDismissed } from '../actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorStyles, textStyles } from '../styles';
+import { typographyStyles } from '../styles/typography';
 import { Card, Input, CardButton, CardSection, Spinner } from './common';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
@@ -43,6 +44,40 @@ class MainScreen extends Component {
             Old surveys
           </Text>
         </View>
+        <View style={styles.existingSurveysHolder}>
+          <FlatList
+            style={styles.flatList}
+            data={[
+              {key: '0', date: '25.8.2017', title: 'Pizza and beer'},
+              {key: '1', date: '1.7.2017', title: 'Qvik internal'},
+              {key: '2', date: '16.5.2017', title: 'IDxA Design'},
+              {key: '3', date: '13.4.2017', title: 'Pizza and beer'},
+              {key: '4', date: '21.3.2017', title: 'Pizza and beer'},
+              {key: '5', date: '1.7.2017', title: 'Qvik internal'},
+              {key: '6', date: '16.5.2017', title: 'IDxA Design'},
+              {key: '7', date: '13.4.2017', title: 'Pizza and beer'},
+              {key: '8', date: '21.3.2017', title: 'Pizza and beer'}
+            ]}
+            renderItem={({item}) => (
+            <View style={styles.listItem}>
+              <Text style={styles.listItemDate}>{item.date}</Text>
+              <Text style={styles.listItemTitle}>{item.title}</Text>
+              <TouchableOpacity
+                style={styles.listItemButton}
+                activeOpacity={0.5}
+              >
+                <Text style={styles.listItemButtonText}>Open survey</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.listItemButton}
+                activeOpacity={0.5}
+              >
+                <Text style={styles.listItemButtonText}>Statistics</Text>
+              </TouchableOpacity>
+            </View>
+            )}
+          />
+        </View>
       </View>
     );
   }
@@ -59,34 +94,34 @@ class MainScreen extends Component {
           <Text style={styles.headerStyle}>
             Create a new survey
           </Text>
-          <View style={styles.createFormHolder}>
-            <Input
-              placeholder={'Title'}
-              onSubmitEditing={Keyboard.dismiss}
-              returnKeyType={'done'}
-            />
-            <RadioForm
-              radio_props={survey_type_props}
-              formHorizontal={false}
-              buttonColor={colorStyles.brand.primary}
-              labelStyle={styles.radioFormLabel}
-              buttonStyle={styles.radioFormButton}
-              style={styles.radioForm}
-              buttonSize={40}
-              buttonOuterSize={55}
-              initial={0}
-              onPress={(value) => {}}
-            />
-            <CardButton
-              onPress={() => navigation.navigate('Survey')}>
-              {context.formatMessage(
-                {
-                  id: "createSurveyCreate.button.label",
-                  defaultMessage: "Create"
-                })
-              }
-            </CardButton>
-          </View>
+        </View>
+        <View style={styles.createFormHolder}>
+          <Input
+            placeholder={'Title'}
+            onSubmitEditing={Keyboard.dismiss}
+            returnKeyType={'done'}
+          />
+          <RadioForm
+            radio_props={survey_type_props}
+            formHorizontal={false}
+            buttonColor={colorStyles.brand.primary}
+            labelStyle={styles.radioFormLabel}
+            buttonStyle={styles.radioFormButton}
+            style={styles.radioForm}
+            buttonSize={40}
+            buttonOuterSize={55}
+            initial={0}
+            onPress={(value) => {}}
+          />
+          <CardButton
+            onPress={() => navigation.navigate('Survey')}>
+            {context.formatMessage(
+              {
+                id: "createSurveyCreate.button.label",
+                defaultMessage: "Create"
+              })
+            }
+          </CardButton>
         </View>
       </KeyboardAwareScrollView>
     );
@@ -172,12 +207,12 @@ const styles = StyleSheet.create({
     backgroundColor: colorStyles.white,
     justifyContent: 'center',
     padding: 20,
+    paddingBottom: 0,
   },
   mainHeadersHolder: {
-    flex: 1,
     alignItems: 'center',
     margin: 50,
-    paddingTop: 100,
+    paddingTop: 80,
     height: 100
   },
   mainButtonsHolder: {
@@ -187,6 +222,44 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     margin: 100,
     paddingBottom: 150,
+  },
+  existingSurveysHolder: {
+    marginTop: 50,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    height: 70,
+    marginBottom: 10,
+    marginLeft: 60,
+    marginRight: 60,
+    borderBottomWidth: 1,
+    borderColor: colorStyles.border.light
+  },
+  listItemDate: {
+    ...textStyles.listItem,
+    ...typographyStyles.dateFont,
+    width: 130
+  },
+  listItemTitle: {
+    ...textStyles.listItem,
+    width: 400
+  },
+  listItemButton: {
+    width: 160,
+    backgroundColor: 'transparent'
+  },
+  listItemButtonText: {
+    ...textStyles.listItem,
+    ...typographyStyles.listButton,
+    color: colorStyles.brand.primary,
+    textAlign: 'center',
+    fontSize: 20
   },
   createFormHolder: {
     flex: 1,
@@ -198,8 +271,6 @@ const styles = StyleSheet.create({
   radioFormLabel: {
     ...textStyles.button,
     lineHeight: 65,
-  },
-  radioFormButton: {
   },
   radioForm: {
     marginTop: 10,

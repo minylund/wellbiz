@@ -33,8 +33,10 @@ class App extends Component {
     firebase.initializeApp(config);
     Font.loadAsync({
       'RobotoSlab-Regular': require('./assets/fonts/RobotoSlab-Regular.ttf'),
+      'RobotoSlab-Bold': require('./assets/fonts/RobotoSlab-Bold.ttf'),
       'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
       'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
+      'Roboto-Black': require('./assets/fonts/Roboto-Black.ttf'),
     });
   }
 

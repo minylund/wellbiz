@@ -42,6 +42,7 @@ class LoginForm extends Component {
      return (
         <KeyboardAwareScrollView
           resetScrollToCoords={{ x: 0, y: 0 }}
+          extraHeight={120}
           contentContainerStyle={styles.mainHolder}
           scrollEnabled={false}
         >
@@ -105,7 +106,7 @@ const styles = {
   },
   loginButton: {
     height: 100,
-    marginBottom: 150,
+    marginBottom: 130,
   }
 };
 
