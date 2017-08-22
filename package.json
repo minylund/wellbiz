@@ -19,7 +19,9 @@
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "react-native-floating-labels": "1.1.4"
+    "react-native-floating-labels": "1.1.4",
+    "react-native-keyboard-aware-scroll-view": "^0.2.0",
+    "react-native-simple-radio-button": "^2.6.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

@@ -4,8 +4,8 @@ const grayBase = '#000000';
 
 export const colorStyles = {
   brand: {
-    primary: '#fff', // Blue Yonder
-    secondary: '#eee', // Onyx
+    primary: '#F9DF6E', // Blue Yonder
+    secondary: '#ECD263', // Onyx
     success: '#FBFFF1', // Ivory
     info: '#B4C5E4', // Light Steel Blue
     warning: '#fff',

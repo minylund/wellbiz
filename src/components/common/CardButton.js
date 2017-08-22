@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, Image, View } from 'react-native';
-import { textStyles } from '../../styles';
+import { colorStyles, textStyles } from '../../styles';
 
 const CardButton = ({ imagePath, onPress, children }) => {
   const { buttonStyle, textStyle } = styles;
@@ -37,14 +37,14 @@ const styles = {
   textHolder: {
     height: 70,
     width: 300,
-    backgroundColor: '#F9DF6E',
+    backgroundColor: colorStyles.brand.primary,
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
     marginBottom: 5,
     borderBottomWidth: 5,
     borderLeftWidth: 5,
-    borderColor: '#ECD263'
+    borderColor: colorStyles.brand.secondary
   },
   textStyle: {
     ...textStyles.button,

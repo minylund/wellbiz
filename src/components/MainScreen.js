@@ -1,11 +1,18 @@
 //@flow
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Platform } from 'react-native';
+import { Text, View, StyleSheet, Platform, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { newSurveyPressed, openExistingSurvey, pageDismissed } from '../actions';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorStyles, textStyles } from '../styles';
-import { CardButton } from './common/CardButton';
+import { Card, Input, CardButton, CardSection, Spinner } from './common';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+var survey_type_props = [
+  {label: 'Internal', value: 0 },
+  {label: 'External', value: 1 }
+];
 
 class MainScreen extends Component {
   static navigationOptions = {
@@ -40,15 +47,48 @@ class MainScreen extends Component {
     );
   }
 
-  renderNewSection() {
+  renderNewSection(context) {
+    const { navigation } = this.props;
     return(
-      <View style={styles.mainHolder}>
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={styles.mainHolder}
+        scrollEnabled={false}
+      >
         <View style={styles.mainHeadersHolder}>
           <Text style={styles.headerStyle}>
             Create a new survey
           </Text>
+          <View style={styles.createFormHolder}>
+            <Input
+              placeholder={'Title'}
+              onSubmitEditing={Keyboard.dismiss}
+              returnKeyType={'done'}
+            />
+            <RadioForm
+              radio_props={survey_type_props}
+              formHorizontal={false}
+              buttonColor={colorStyles.brand.primary}
+              labelStyle={styles.radioFormLabel}
+              buttonStyle={styles.radioFormButton}
+              style={styles.radioForm}
+              buttonSize={40}
+              buttonOuterSize={55}
+              initial={0}
+              onPress={(value) => {}}
+            />
+            <CardButton
+              onPress={() => navigation.navigate('Survey')}>
+              {context.formatMessage(
+                {
+                  id: "createSurveyCreate.button.label",
+                  defaultMessage: "Create"
+                })
+              }
+            </CardButton>
+          </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
 
   }
@@ -129,7 +169,7 @@ export default connect(mapStateToProps, { emailChanged,
 const styles = StyleSheet.create({
   mainHolder: {
     flex: 1,
-    backgroundColor: colorStyles.brand.primary,
+    backgroundColor: colorStyles.white,
     justifyContent: 'center',
     padding: 20,
   },
@@ -147,6 +187,23 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     margin: 100,
     paddingBottom: 150,
+  },
+  createFormHolder: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 50
+  },
+  radioFormLabel: {
+    ...textStyles.button,
+    lineHeight: 65,
+  },
+  radioFormButton: {
+  },
+  radioForm: {
+    marginTop: 10,
+    marginBottom: 30
   },
   headerStyle: {
     ...textStyles.headerBig,

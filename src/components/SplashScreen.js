@@ -59,7 +59,7 @@ export default connect(null, mapDispatchToProps)(SplashScreen);
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: colorStyles.brand.primary,
+    backgroundColor: colorStyles.white,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

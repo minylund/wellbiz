@@ -3,19 +3,23 @@ import { TextInput, View, Text } from 'react-native';
 import { textStyles } from '../../styles';
 import FloatingLabel from 'react-native-floating-labels';
 
-const Input = ({ value, onChangeText, placeholder, secureTextEntry }) => {
+const Input = ({ value, autoFocus, returnKeyType, onChangeText, onSubmitEditing, placeholder, secureTextEntry, keyboardType }) => {
   const { labelInput, input, formInput, containerStyle, borderStyle } = styles;
   return (
     <View style={containerStyle}>
-      <FloatingLabel 
+      <FloatingLabel
+        autoFocus={autoFocus}
         secureTextEntry={secureTextEntry}
         labelStyle={labelInput}
         inputStyle={input}
         style={formInput}
         value={value}
+        keyboardType={keyboardType}
         onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
+        returnKeyType={returnKeyType}
       >{placeholder}</FloatingLabel>
-    <View style={borderStyle}></View>
+      <View style={borderStyle}></View>
     </View>
   );
 };
@@ -34,8 +38,7 @@ const styles = {
     borderWidth: 0,
   },
   containerStyle: {
-    height: 70,
-    flex: 1,
+    height: 75,
     flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 40

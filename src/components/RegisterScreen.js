@@ -60,7 +60,7 @@ export default injectRegisterScreen;
 const styles = StyleSheet.create({
   mainHolder: {
     flex: 1,
-    backgroundColor: colorStyles.brand.primary,
+    backgroundColor: colorStyles.white,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

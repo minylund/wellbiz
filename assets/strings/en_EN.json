@@ -4,4 +4,5 @@
   "main.label": "Menu",
   "oldSurveys.button.label": "View old surveys",
   "createSurvey.button.label": "Create a new survey",
+  "createSurveyCreate.button.label": "Create",
 }
