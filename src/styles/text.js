@@ -21,6 +21,11 @@ export const textStyles = {
       color: colorStyles.text.gray,
       fontSize: 60,
     },
+    inputLabel: {
+      ...typographyStyles.secondaryFont,
+      color: colorStyles.text.gray,
+      fontSize: 15,
+    },
     input: {
       ...typographyStyles.primaryFont,
       color: colorStyles.text.gray,

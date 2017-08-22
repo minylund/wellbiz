@@ -1,46 +1,50 @@
 import React from 'react';
 import { TextInput, View, Text } from 'react-native';
 import { textStyles } from '../../styles';
+import FloatingLabel from 'react-native-floating-labels';
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
-  const { inputStyle, labelStyle, containerStyle } = styles;
+const Input = ({ value, onChangeText, placeholder, secureTextEntry }) => {
+  const { labelInput, input, formInput, containerStyle, borderStyle } = styles;
   return (
     <View style={containerStyle}>
-      <Text style={labelStyle}>{label}</Text>
-      <TextInput
+      <FloatingLabel 
         secureTextEntry={secureTextEntry}
-        autoCorrect={false}
-        placeholder={placeholder}
-        style={inputStyle}
+        labelStyle={labelInput}
+        inputStyle={input}
+        style={formInput}
         value={value}
         onChangeText={onChangeText}
-      />
+      >{placeholder}</FloatingLabel>
+    <View style={borderStyle}></View>
     </View>
   );
 };
 
 const styles = {
-  inputStyle: {
-    ...textStyles.input,
-    color: '#000',
-    lineHeight: 30,
-    flex: 1,
-    paddingBottom: 10,
-    width: 500,
-    borderBottomWidth: 2,
-    borderColor: '#ddd'
+  labelInput: {
+    ...textStyles.inputLabel,
   },
-  labelStyle: {
-    fontSize: 18,
-    paddingLeft: 20,
-    flex: 1
+  formInput: {
+    flex: 1,
+    width: 500,
+  },
+  input: {
+    ...textStyles.input,
+    lineHeight: 30,
+    borderWidth: 0,
   },
   containerStyle: {
-    height: 90,
+    height: 70,
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    marginBottom: 40
+  },
+  borderStyle: {
+    height: 2,
+    width: 480,
+    backgroundColor: "#ddd",
+  },
 };
 
 export { Input };
