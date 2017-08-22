@@ -7,7 +7,7 @@ import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed } f
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorStyles, textStyles } from '../styles';
 import { typographyStyles } from '../styles/typography';
-import { Card, Input, CardButton, CardSection, Spinner } from './common';
+import { Input, MainButton } from './common';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 var survey_type_props = [
@@ -55,7 +55,10 @@ class MainScreen extends Component {
     );
   }
 
-  renderExistingSection() {
+  // View for showing list of existing surveys
+
+  renderExistingSection(context) {
+    const { navigation } = this.props;
     return(
       <View style={styles.mainHolder}>
         {this.renderBackButton()}
@@ -83,6 +86,7 @@ class MainScreen extends Component {
               <Text style={styles.listItemDate}>{item.date}</Text>
               <Text style={styles.listItemTitle}>{item.title}</Text>
               <TouchableOpacity
+                onPress={() => navigation.navigate('Survey')}
                 style={styles.listItemButton}
                 activeOpacity={0.5}
               >
@@ -102,6 +106,8 @@ class MainScreen extends Component {
       </View>
     );
   }
+
+  // View for showing survey creation form
 
   renderNewSection(context) {
     const { navigation } = this.props;
@@ -135,7 +141,7 @@ class MainScreen extends Component {
             initial={0}
             onPress={(value) => {}}
           />
-          <CardButton
+          <MainButton
             onPress={() => navigation.navigate('Survey')}>
             {context.formatMessage(
               {
@@ -143,12 +149,14 @@ class MainScreen extends Component {
                 defaultMessage: "Create"
               })
             }
-          </CardButton>
+          </MainButton>
         </View>
       </KeyboardAwareScrollView>
     );
 
   }
+
+  // View for showing survey statistics
 
   renderStatisticsSection(context) {
     const { navigation } = this.props;
@@ -161,12 +169,16 @@ class MainScreen extends Component {
           </Text>
         </View>
         <View style={styles.statisticsFormHolder}>
-          
+          <Text >
+            Statistics here :)
+          </Text>
         </View>
       </View>
     );
 
   }
+
+  // View for showing initial menu
 
   renderInitialSection(context) {
     return(
@@ -177,7 +189,7 @@ class MainScreen extends Component {
           </Text>
         </View>
         <View style={styles.mainButtonsHolder}>
-          <CardButton
+          <MainButton
             imagePath={require('../../assets/images/menu-statistics.png')}
             onPress={ () => this.props.openExistingSurvey()}>
             {context.formatMessage(
@@ -186,8 +198,8 @@ class MainScreen extends Component {
                 defaultMessage: "View old surveys"
               })
             }
-          </CardButton>
-          <CardButton
+          </MainButton>
+          <MainButton
             imagePath={require('../../assets/images/menu-create.png')}
             onPress={ () => this.props.newSurveyPressed()}>
             {context.formatMessage(
@@ -196,7 +208,7 @@ class MainScreen extends Component {
                 defaultMessage: "Create a new survey"
               })
             }
-          </CardButton>
+          </MainButton>
         </View>
       </View>
     );
@@ -204,6 +216,8 @@ class MainScreen extends Component {
 
   render() {
     console.log(this.props);
+
+    // Render section based on current state
 
     if (this.props.showCreation) {
       return this.renderNewSection(this);
@@ -229,10 +243,9 @@ const mapStateToProps = ({ mainscreen }) => {
 let injectMainScreen = injectIntl(MainScreen);
 Object.assign(injectMainScreen, MainScreen);
 
-//export default injectMainScreen;
-
 export default connect(mapStateToProps, { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed })(injectMainScreen);
 
+// STYLING
 const styles = StyleSheet.create({
   mainHolder: {
     flex: 1,

@@ -19,6 +19,9 @@ class SurveyScreen extends Component {
   }
 
   renderEmojiButton(emojiId) {
+
+    // Render emoji face button for id
+
     let imageSource = '';
     switch (emojiId) {
       case 'sad':
@@ -45,7 +48,6 @@ class SurveyScreen extends Component {
   render() {
     return (
       <View style={styles.mainHolder}>
-        <View style={styles.secretButton}></View>
         <TouchableOpacity
           onPress={ () => this.props.userLogout()}
           style={styles.secretButton}
@@ -80,10 +82,9 @@ const mapStateToProps = ({ mainscreen }) => {
 let injectSurveyScreen = injectIntl(SurveyScreen);
 Object.assign(injectSurveyScreen, SurveyScreen);
 
-//export default injectSurveyScreen;
-
 export default connect(mapStateToProps, { userLogout })(injectSurveyScreen);
 
+// STYLING
 const styles = StyleSheet.create({
   mainHolder: {
     flex: 1,
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   },
   secretButton: {
     width: 100,
-    height: 50,
+    height: 100,
     backgroundColor: colorStyles.brand.primary
   },
   mainHeadersHolder: {

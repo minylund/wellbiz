@@ -3,7 +3,7 @@ import { View, StyleSheet, Keyboard } from 'react-native';
 import { Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Card, Input, CardButton, CardSection, Spinner } from './common';
+import { Input, MainButton, Spinner } from './common';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorStyles } from '../styles';
 
@@ -32,9 +32,9 @@ class LoginForm extends Component {
     }
 
     return (
-      <CardButton onPress={this.onButtonPress.bind(this)}>
+      <MainButton onPress={this.onButtonPress.bind(this)}>
         LOGIN
-      </CardButton>
+      </MainButton>
     );
   }
 
@@ -71,14 +71,15 @@ class LoginForm extends Component {
             {this.props.error}
           </Text>
 
-          <CardSection style={styles.loginButton}>
+          <View style={styles.loginHolder}>
             {this.renderButton()}
-          </CardSection>
+          </View>
         </KeyboardAwareScrollView>
      );
    }
 }
 
+// STYLING
 const styles = {
   mainHolder: {
     flex: 1,
@@ -104,7 +105,7 @@ const styles = {
     alignSelf: 'center',
     color: 'red'
   },
-  loginButton: {
+  loginHolder: {
     height: 100,
     marginBottom: 130,
   }

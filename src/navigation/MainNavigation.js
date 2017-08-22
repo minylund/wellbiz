@@ -1,8 +1,6 @@
 //import React from 'react';
 import { StackNavigator } from 'react-navigation';
-//import { TabNavigator } from 'react-navigation';
 import MainScreen from '../components/MainScreen';
-import ProfileScreen from '../components/ProfileScreen';
 import SurveyScreen from '../components/SurveyScreen';
 import { colorStyles, textStyles } from '../styles';
 

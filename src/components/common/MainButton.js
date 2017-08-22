@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, Image, View } from 'react-native';
 import { colorStyles, textStyles } from '../../styles';
 
-const CardButton = ({ imagePath, onPress, children }) => {
+const MainButton = ({ imagePath, onPress, children }) => {
   const { buttonStyle, textStyle } = styles;
 
   return (
@@ -62,4 +62,4 @@ const styles = {
   },
 };
 
-export { CardButton };
+export { MainButton };
