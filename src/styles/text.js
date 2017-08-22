@@ -19,7 +19,7 @@ export const textStyles = {
     headerBig: {
       ...typographyStyles.primaryFont,
       color: colorStyles.text.gray,
-      fontSize: 80,
+      fontSize: 60,
     },
     input: {
       ...typographyStyles.primaryFont,

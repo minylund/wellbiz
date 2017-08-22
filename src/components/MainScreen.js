@@ -31,9 +31,11 @@ class MainScreen extends Component {
   renderExistingSection() {
     return(
       <View style={styles.mainHolder}>
-        <Text>
-        OLD SURVEY
-      </Text>
+        <View style={styles.mainHeadersHolder}>
+          <Text style={styles.headerStyle}>
+            Old surveys
+          </Text>
+        </View>
       </View>
     );
   }
@@ -41,9 +43,11 @@ class MainScreen extends Component {
   renderNewSection() {
     return(
       <View style={styles.mainHolder}>
-        <Text>
-        NEW SURVEY
-      </Text>
+        <View style={styles.mainHeadersHolder}>
+          <Text style={styles.headerStyle}>
+            Create a new survey
+          </Text>
+        </View>
       </View>
     );
 
@@ -52,24 +56,34 @@ class MainScreen extends Component {
   renderInitialSection(context) {
     return(
       <View style={styles.mainHolder}>
-
-      <CardButton onPress={ () => this.props.newSurveyPressed()}>
-        {context.formatMessage(
-          {
-            id: "survey.button.label",
-            defaultMessage: "survey"
-          })
-        }
-      </CardButton>
-      <CardButton onPress={ () => this.props.openExistingSurvey()}>
-        {context.formatMessage(
-          {
-            id: "survey.button.label",
-            defaultMessage: "survey"
-          })
-        }
-      </CardButton>
-    </View>
+        <View style={styles.mainHeadersHolder}>
+          <Text style={styles.headerStyle}>
+            What would you like to do?
+          </Text>
+        </View>
+        <View style={styles.mainButtonsHolder}>
+          <CardButton
+            imagePath={require('../../assets/images/menu-statistics.png')}
+            onPress={ () => this.props.openExistingSurvey()}>
+            {context.formatMessage(
+              {
+                id: "oldSurveys.button.label",
+                defaultMessage: "View old surveys"
+              })
+            }
+          </CardButton>
+          <CardButton
+            imagePath={require('../../assets/images/menu-create.png')}
+            onPress={ () => this.props.newSurveyPressed()}>
+            {context.formatMessage(
+              {
+                id: "createSurvey.button.label",
+                defaultMessage: "Create a new survey"
+              })
+            }
+          </CardButton>
+        </View>
+      </View>
     );
   }
 
@@ -116,15 +130,27 @@ const styles = StyleSheet.create({
   mainHolder: {
     flex: 1,
     backgroundColor: colorStyles.brand.primary,
-    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-    paddingTop: Platform.OS === 'ios' ? 20 : 0,
+    padding: 20,
   },
-  title: {
-    ...textStyles.title,
-    fontSize: 32,
-    margin: 8,
+  mainHeadersHolder: {
+    flex: 1,
+    alignItems: 'center',
+    margin: 50,
+    paddingTop: 100,
+    height: 100
+  },
+  mainButtonsHolder: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    margin: 100,
+    paddingBottom: 150,
+  },
+  headerStyle: {
+    ...textStyles.headerBig,
+    textAlign: 'center',
+    lineHeight: 65,
   },
 });

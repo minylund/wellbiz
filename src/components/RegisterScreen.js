@@ -27,7 +27,7 @@ class RegisterScreen extends Component {
     this.formatMessage = this.props.intl.formatMessage.bind(this);
 
     RegisterScreen.navigationOptions.title = this.formatMessage({
-      id: "register.label",
+      id: "main.label",
       defaultMessage: "Survey_test"
      });
   }
@@ -43,8 +43,8 @@ class RegisterScreen extends Component {
         />
           <Text style={styles.text}>
             <FormattedMessage
-              id="register.label"
-              defaultMessage={'Register'}
+              id="main.label"
+              defaultMessage={'menu'}
               />
           </Text>
         </View>

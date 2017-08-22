@@ -9,12 +9,10 @@ import fiLocale from 'react-intl/locale-data/fi';
 import enLocale from 'react-intl/locale-data/en';
 import AppNavigation from './src/navigation/AppNavigation';
 import reducers from './src/reducers';
-import FI_MESSAGES from './assets/strings/fi_FI.json';
 import EN_MESSAGES from './assets/strings/en_EN.json';
 import { Font } from 'expo';
 
 const translations = {
-  fi: FI_MESSAGES,
   en: EN_MESSAGES,
 };
 
@@ -45,11 +43,11 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    addLocaleData([...fiLocale, ...enLocale]);
+    addLocaleData([...enLocale]);
   }
 
   getLocale () {
-    return 'fi';
+    return 'en';
     /*if (Platform.OS === 'android') {
       return NativeModules.I18nManager.localeIdentifier.replace(/_/, '-').split('-')[0];
     } else {

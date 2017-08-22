@@ -1,8 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, Image, View } from 'react-native';
 import { textStyles } from '../../styles';
 
-const CardButton = ({ onPress, children }) => {
+const CardButton = ({ imagePath, onPress, children }) => {
   const { buttonStyle, textStyle } = styles;
 
   return (
@@ -11,19 +11,30 @@ const CardButton = ({ onPress, children }) => {
       style={buttonStyle}
       activeOpacity={0.5}
     >
-      <Text style={textStyle}>
-        {children}
-      </Text>
+      <View style={styles.buttonHolder}>
+        {imagePath != null &&
+          <Image 
+            source={imagePath}
+            style={styles.image}
+          />
+        }
+        <View style={styles.textHolder}>
+          <Text style={textStyle}>
+            {children}
+          </Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = {
-  textStyle: {
-    ...textStyles.button,
-    lineHeight: 65
+  buttonHolder: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
   },
-  buttonStyle: {
+  textHolder: {
     height: 70,
     width: 300,
     backgroundColor: '#F9DF6E',
@@ -34,7 +45,21 @@ const styles = {
     borderBottomWidth: 5,
     borderLeftWidth: 5,
     borderColor: '#ECD263'
-  }
+  },
+  textStyle: {
+    ...textStyles.button,
+    textAlign: 'center',
+    lineHeight: 65,
+  },
+  buttonStyle: {
+    height: 150,
+    width: 300,
+  },
+  image: {
+    width: 140,
+    height: 110,
+    marginBottom: 10,
+  },
 };
 
 export { CardButton };

@@ -1,9 +1,7 @@
 {
   "login.label": "LOGIN",
   "logout.label": "Logout",
-  "register.button.label": "Register",
-  "register.label": "Registration",
   "main.label": "Menu",
-  "survey.button.label": "Survey",
-  "splash.label": "Wellbiz",
+  "oldSurveys.button.label": "View old surveys",
+  "createSurvey.button.label": "Create a new survey",
 }

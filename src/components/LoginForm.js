@@ -81,7 +81,7 @@ const styles = {
     backgroundColor: colorStyles.brand.primary,
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: 40,
+    paddingTop: 30,
   },
   logo: {
     width: 70,

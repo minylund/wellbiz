@@ -25,6 +25,7 @@ const styles = {
     color: '#000',
     lineHeight: 30,
     flex: 1,
+    paddingBottom: 10,
     width: 500,
     borderBottomWidth: 2,
     borderColor: '#ddd'
@@ -35,7 +36,7 @@ const styles = {
     flex: 1
   },
   containerStyle: {
-    height: 80,
+    height: 90,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center'
