@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Image, Text, View, StyleSheet, Platform, Keyboard, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { newSurveyPressed, openExistingSurvey, pageDismissed } from '../actions';
+import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed } from '../actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorStyles, textStyles } from '../styles';
 import { typographyStyles } from '../styles/typography';
@@ -29,6 +29,10 @@ class MainScreen extends Component {
       id: "main.label",
       defaultMessage: "Menu"
      });
+  }
+
+  componentWillMount() {
+    this.props.pageDismissed();
   }
 
   componentWillUnMount() {
@@ -85,6 +89,7 @@ class MainScreen extends Component {
                 <Text style={styles.listItemButtonText}>Open survey</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                onPress={ () => this.props.openStatistics()}
                 style={styles.listItemButton}
                 activeOpacity={0.5}
               >
@@ -145,6 +150,24 @@ class MainScreen extends Component {
 
   }
 
+  renderStatisticsSection(context) {
+    const { navigation } = this.props;
+    return(
+      <View style={styles.mainHolder}>
+        {this.renderBackButton()}
+        <View style={styles.mainHeadersHolder}>
+          <Text style={styles.headerStyle}>
+            Statistics
+          </Text>
+        </View>
+        <View style={styles.statisticsFormHolder}>
+          
+        </View>
+      </View>
+    );
+
+  }
+
   renderInitialSection(context) {
     return(
       <View style={styles.mainHolder}>
@@ -190,33 +213,25 @@ class MainScreen extends Component {
       return this.renderExistingSection(this);
     }
 
+    if (this.props.showStatistics) {
+      return this.renderStatisticsSection(this);
+    }
+
     return this.renderInitialSection(this);
   }
 }
 
 const mapStateToProps = ({ mainscreen }) => {
-  const { showCreation, showExisting } = mainscreen;
-  return { showCreation,  showExisting };
+  const { showCreation, showExisting, showStatistics, showInitial } = mainscreen;
+  return { showCreation,  showExisting, showStatistics, showInitial };
 };
-
 
 let injectMainScreen = injectIntl(MainScreen);
 Object.assign(injectMainScreen, MainScreen);
 
 //export default injectMainScreen;
 
-export default connect(mapStateToProps, { newSurveyPressed, openExistingSurvey, pageDismissed })(injectMainScreen);
-
-/*
-const mapStateToProps = ({ auth }) => {
-  const { email, password, error, user, loading } = auth;
-  return { email, password, user, error, loading };
-};
-
-export default connect(mapStateToProps, { emailChanged,
-  passwordChanged,
-  loginUser })(LoginForm);
-  */
+export default connect(mapStateToProps, { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed })(injectMainScreen);
 
 const styles = StyleSheet.create({
   mainHolder: {
@@ -292,6 +307,13 @@ const styles = StyleSheet.create({
   radioForm: {
     marginTop: 10,
     marginBottom: 30
+  },
+  statisticsFormHolder: {
+    marginTop: 50,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
   },
   headerStyle: {
     ...textStyles.headerBig,

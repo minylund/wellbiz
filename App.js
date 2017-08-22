@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import 'intl';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import fiLocale from 'react-intl/locale-data/fi';
 import enLocale from 'react-intl/locale-data/en';

@@ -2,6 +2,7 @@
 import {
   MAINSCREEN_SHOW_EXISTING_SURVEYS,
   MAINSCREEN_SHOW_NEW_SURVEY,
+  MAINSCREEN_SHOW_STATISTICS,
   MAINSCREEN_PAGE_DISMISSED
  } from './types';
 
@@ -14,6 +15,12 @@ export const newSurveyPressed = () => {
 export const openExistingSurvey = () => {
     return {
       type: MAINSCREEN_SHOW_EXISTING_SURVEYS,
+    };
+};
+
+export const openStatistics = () => {
+    return {
+      type: MAINSCREEN_SHOW_STATISTICS,
     };
 };
 

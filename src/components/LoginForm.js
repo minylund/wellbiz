@@ -35,7 +35,7 @@ class LoginForm extends Component {
       <CardButton onPress={this.onButtonPress.bind(this)}>
         LOGIN
       </CardButton>
-  );
+    );
   }
 
    render() {

@@ -11,4 +11,5 @@ export const USER_LOGOUT = 'user_logout';
 
 export const MAINSCREEN_SHOW_EXISTING_SURVEYS = 'mainscreen_show_existing_surveys';
 export const MAINSCREEN_SHOW_NEW_SURVEY = 'mainscreen_show_new_survey';
+export const MAINSCREEN_SHOW_STATISTICS = 'mainscreen_show_statistics';
 export const MAINSCREEN_PAGE_DISMISSED = 'mainscreen_page_dismissed';
