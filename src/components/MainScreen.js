@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Image, Text, View, StyleSheet, Platform, Keyboard, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed } from '../actions';
+import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed, createSurvey } from '../actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorStyles, textStyles } from '../styles';
 import { typographyStyles } from '../styles/typography';
@@ -19,6 +19,10 @@ class MainScreen extends Component {
   static navigationOptions = {
     title: 'Main'
   };
+
+  onCreateSurveyPress() {
+    this.props.createSurvey();
+  }
 
   constructor(props) {
     super(props);
@@ -142,7 +146,7 @@ class MainScreen extends Component {
             onPress={(value) => {}}
           />
           <MainButton
-            onPress={() => navigation.navigate('Survey')}>
+            onPress={this.onCreateSurveyPress.bind(this)}>
             {context.formatMessage(
               {
                 id: "createSurveyCreate.button.label",
@@ -236,14 +240,14 @@ class MainScreen extends Component {
 }
 
 const mapStateToProps = ({ mainscreen }) => {
-  const { showCreation, showExisting, showStatistics, showInitial } = mainscreen;
-  return { showCreation,  showExisting, showStatistics, showInitial };
+  const { showCreation, showExisting, showStatistics, showInitial, error, survey, loading } = mainscreen;
+  return { showCreation,  showExisting, showStatistics, showInitial, error, survey, loading };
 };
 
 let injectMainScreen = injectIntl(MainScreen);
 Object.assign(injectMainScreen, MainScreen);
 
-export default connect(mapStateToProps, { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed })(injectMainScreen);
+export default connect(mapStateToProps, { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed, createSurvey })(injectMainScreen);
 
 // STYLING
 const styles = StyleSheet.create({

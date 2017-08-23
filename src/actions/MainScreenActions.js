@@ -1,3 +1,6 @@
+/**
+ * Actions in which you can change the state on main screen
+ */
 
 import {
   MAINSCREEN_SHOW_EXISTING_SURVEYS,
