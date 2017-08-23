@@ -132,6 +132,7 @@ class MainScreen extends Component {
             placeholder={'Title'}
             onSubmitEditing={Keyboard.dismiss}
             returnKeyType={'done'}
+            clearButtonMode={'while-editing'}
           />
           <RadioForm
             radio_props={survey_type_props}

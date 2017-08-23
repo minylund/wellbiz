@@ -56,6 +56,7 @@ class LoginForm extends Component {
               value={this.props.email}
               keyboardType={'email-address'}
               returnKeyType={'done'}
+              clearButtonMode={'while-editing'}
             />
             <Input
               secureTextEntry
@@ -64,6 +65,7 @@ class LoginForm extends Component {
               onSubmitEditing={Keyboard.dismiss}
               value={this.props.password}
               returnKeyType={'done'}
+              clearButtonMode={'while-editing'}
             />
           </View>
 
