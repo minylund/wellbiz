@@ -6,6 +6,7 @@ import { userLogout } from '../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
 import { Video } from 'expo';
+import * as Animatable from 'react-native-animatable';
 
 class SurveyScreen extends Component {
   static navigationOptions = {
@@ -15,33 +16,93 @@ class SurveyScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {animating: false};
+
     this.formatMessage = this.props.intl.formatMessage.bind(this);
+  }
+
+  onEmojiButtonPress(emojiId) {
+      console.log(emojiId);
+      if (this.state.animating) {
+        return;
+      }
+      this.setState({animating: true});
+      switch (emojiId) {
+        case 'sad':
+          this.refs.HighlightRef_sad.tada(2000);
+          this.refs.VideoRef_sad.playAsync();
+          setTimeout( () => { 
+            this.refs.VideoRef_sad.pauseAsync();
+            this.refs.VideoRef_sad.setPositionAsync(0);
+            this.setState({animating: false});
+          },
+            2000
+          );
+          break;
+        case 'normal':
+          this.refs.HighlightRef_normal.pulse(2000);
+          this.refs.VideoRef_normal.playAsync();
+          setTimeout( () => { 
+            this.refs.VideoRef_normal.pauseAsync();
+            this.refs.VideoRef_normal.setPositionAsync(0);
+            this.setState({animating: false});
+          },
+            2000
+          );
+          break;
+        case 'happy':
+          this.refs.HighlightRef_happy.swing(2000);
+          this.refs.VideoRef_happy.playAsync();
+          setTimeout( () => { 
+            this.refs.VideoRef_happy.pauseAsync();
+            this.refs.VideoRef_happy.setPositionAsync(0);
+            this.setState({animating: false});
+          },
+            2000
+          );
+          break;
+        default:
+          return
+      }
   }
 
   renderEmojiButton(emojiId) {
 
     // Render emoji face button for id
 
-    let imageSource = '';
+    //let {paused} = this.state;
+
+    let videoSource = '';
     switch (emojiId) {
       case 'sad':
-        imageSource = 'https://cdn.shopify.com/s/files/1/1061/1924/products/Crying_Emoji_Icon_2_large.png?v=1485577094';
+        videoSource = require('../../assets/video/emoji_sad.mp4');
         break;
-      case 'ok':
-        imageSource = 'https://cdn.shopify.com/s/files/1/1061/1924/products/Neutral_Face_Emoji_large.png?v=1480481054';
+      case 'normal':
+        videoSource = require('../../assets/video/emoji_normal.mp4');
         break;
       case 'happy':
-        imageSource = 'https://cdn.shopify.com/s/files/1/1061/1924/products/Emoji_Icon_-_Happy_large.png?v=1485573423';
+        videoSource = require('../../assets/video/emoji_happy.mp4');
         break;
       default:
         return null
     }
 
     return (
-      <Image 
-        source={{uri: imageSource}}
-        style={styles.emoji}
-      />
+      <TouchableOpacity
+        onPress={this.onEmojiButtonPress.bind(this, emojiId)}
+        style={styles.emojiButtonHolder}
+        activeOpacity={0.5}
+      >
+        <Animatable.View
+          ref={"HighlightRef_"+emojiId}
+          style={styles.emojiHighlight}>
+        <Video
+          source={videoSource}
+          ref={"VideoRef_"+emojiId}
+          style={styles.emojiVideoPlayer}
+          isLooping={true}
+        /></Animatable.View>
+      </TouchableOpacity>
     );
   }
 
@@ -58,17 +119,11 @@ class SurveyScreen extends Component {
             How are you feeling today?
           </Text>
         </View>
-        <View style={styles.emojiHolder}>
+        <View style={styles.emojisHolder}>
           {this.renderEmojiButton('sad')}
-          {this.renderEmojiButton('ok')}
+          {this.renderEmojiButton('normal')}
           {this.renderEmojiButton('happy')}
         </View>
-        <Video
-          source = {{uri :'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'}}
-          ref={this._handleVideoRef}
-          style={styles.videoPlayer}
-          shouldPlay
-        />
       </View>
     )
   }
@@ -100,7 +155,7 @@ const styles = StyleSheet.create({
   mainHeadersHolder: {
     alignItems: 'center',
     margin: 50,
-    paddingTop: 100,
+    paddingTop: 80,
     height: 50
   },
   headerStyle: {
@@ -108,15 +163,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 65,
   },
-  emojiHolder: {
+  emojisHolder: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingTop: 70
   },
-  emoji: {
-    width: 140,
-    height: 140,
+  emojiButtonHolder: {
+    width: 150,
+    height: 150,
     margin: 30,
+  },
+  emojiVideoPlayer: {
+    flex: 1
+  },
+  emojiHighlight: {
+    flex: 1
   }
 });

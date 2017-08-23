@@ -44,4 +44,9 @@ export const textStyles = {
       fontSize: 23,
       lineHeight: 70,
     },
+    error: {
+      ...typographyStyles.secondaryFont,
+      color: colorStyles.text.error,
+      fontSize: 23,
+    },
   };

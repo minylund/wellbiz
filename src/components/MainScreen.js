@@ -92,19 +92,19 @@ class MainScreen extends Component {
               >
                 <Text style={styles.listItemButtonText}>Open survey</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={ () => this.props.openStatistics()}
-                style={styles.listItemButton}
-                activeOpacity={0.5}
-              >
-                <Text style={styles.listItemButtonText}>Statistics</Text>
-              </TouchableOpacity>
             </View>
             )}
           />
         </View>
       </View>
     );
+    /*<TouchableOpacity
+      onPress={ () => this.props.openStatistics()}
+      style={styles.listItemButton}
+      activeOpacity={0.5}
+    >
+      <Text style={styles.listItemButtonText}>Statistics</Text>
+    </TouchableOpacity>*/
   }
 
   // View for showing survey creation form
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   },
   listItemTitle: {
     ...textStyles.listItem,
-    width: 400
+    width: 560
   },
   listItemButton: {
     width: 160,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Input, MainButton, Spinner } from './common';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { colorStyles } from '../styles';
+import { textStyles, colorStyles } from '../styles';
 
 class LoginForm extends Component {
 
@@ -67,13 +67,14 @@ class LoginForm extends Component {
             />
           </View>
 
+          <View style={styles.loginHolder}>
+            {this.renderButton()}
+          </View>
+
           <Text style={styles.errorTextStyle}>
             {this.props.error}
           </Text>
 
-          <View style={styles.loginHolder}>
-            {this.renderButton()}
-          </View>
         </KeyboardAwareScrollView>
      );
    }
@@ -101,13 +102,12 @@ const styles = {
     marginTop: 50,
   },
   errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
+    height: 50,
+    ...textStyles.error
   },
   loginHolder: {
     height: 100,
-    marginBottom: 130,
+    marginBottom: 80,
   }
 };
 

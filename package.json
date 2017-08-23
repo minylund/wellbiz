@@ -21,7 +21,8 @@
     "redux-thunk": "^2.2.0",
     "react-native-floating-labels": "1.1.4",
     "react-native-keyboard-aware-scroll-view": "^0.2.0",
-    "react-native-simple-radio-button": "^2.6.1"
+    "react-native-simple-radio-button": "^2.6.1",
+    "react-native-animatable": "^1.2.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

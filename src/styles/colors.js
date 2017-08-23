@@ -23,6 +23,7 @@ export const colorStyles = {
   text: {
     button: '#111',
     gray: '#4A4A4A',
+    error: '#FF3A04'
   },
   border: {
     dark: '#979797',
