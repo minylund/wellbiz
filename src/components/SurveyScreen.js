@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Image, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { userLogout } from '../actions';
+import firebase from 'firebase';
+import { userLogout, fetchSurvey, updateAnswers } from '../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
 import { Video } from 'expo';
@@ -15,10 +16,13 @@ class SurveyScreen extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {animating: false};
-
     this.formatMessage = this.props.intl.formatMessage.bind(this);
+  }
+
+
+  componentWillMount() {
+    this.props.fetchSurvey(this.props.navigation.state.params.surveyId);
   }
 
   onEmojiButtonPress(emojiId) {
@@ -26,40 +30,50 @@ class SurveyScreen extends Component {
       if (this.state.animating) {
         return;
       }
+
+
+      let updatedSurvey = { ...this.props.surveyDatabase };
+
       this.setState({animating: true});
       switch (emojiId) {
         case 'sad':
           this.refs.HighlightRef_sad.tada(2000);
           this.refs.VideoRef_sad.playAsync();
-          setTimeout( () => { 
+          setTimeout( () => {
             this.refs.VideoRef_sad.pauseAsync();
             this.refs.VideoRef_sad.setPositionAsync(0);
             this.setState({animating: false});
           },
             2000
           );
+          updatedSurvey.answerSad++;
+          this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
           break;
         case 'normal':
           this.refs.HighlightRef_normal.pulse(2000);
           this.refs.VideoRef_normal.playAsync();
-          setTimeout( () => { 
+          setTimeout( () => {
             this.refs.VideoRef_normal.pauseAsync();
             this.refs.VideoRef_normal.setPositionAsync(0);
             this.setState({animating: false});
           },
             2000
           );
+          updatedSurvey.answerNormal++;
+          this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
           break;
         case 'happy':
           this.refs.HighlightRef_happy.swing(2000);
           this.refs.VideoRef_happy.playAsync();
-          setTimeout( () => { 
+          setTimeout( () => {
             this.refs.VideoRef_happy.pauseAsync();
             this.refs.VideoRef_happy.setPositionAsync(0);
             this.setState({animating: false});
           },
             2000
           );
+          updatedSurvey.answerHappy++;
+          this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
           break;
         default:
           return
@@ -107,6 +121,8 @@ class SurveyScreen extends Component {
   }
 
   render() {
+    console.log('ID OF SURVEY CREATED: ', this.props.navigation.state.params.surveyId);
+    console.log('SURVEY DATA: ', this.props.surveyDatabase);
     return (
       <View style={styles.mainHolder}>
         <TouchableOpacity
@@ -129,15 +145,15 @@ class SurveyScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ mainscreen }) => {
+const mapStateToProps = ({ mainscreen, surveyDatabase }) => {
   const { logout } = mainscreen;
-  return { logout };
+  return { logout, surveyDatabase };
 };
 
 let injectSurveyScreen = injectIntl(SurveyScreen);
 Object.assign(injectSurveyScreen, SurveyScreen);
 
-export default connect(mapStateToProps, { userLogout })(injectSurveyScreen);
+export default connect(mapStateToProps, { userLogout, fetchSurvey, updateAnswers })(injectSurveyScreen);
 
 // STYLING
 const styles = StyleSheet.create({

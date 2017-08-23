@@ -6,7 +6,9 @@ import {
   MAINSCREEN_SHOW_EXISTING_SURVEYS,
   MAINSCREEN_SHOW_NEW_SURVEY,
   MAINSCREEN_SHOW_STATISTICS,
-  MAINSCREEN_PAGE_DISMISSED
+  MAINSCREEN_PAGE_DISMISSED,
+  MAINSCREEN_RADIOBUTTON_CHANGED,
+  MAINSCREEN_TITLE_CHANGED,
  } from './types';
 
 export const newSurveyPressed = () => {
@@ -30,5 +32,19 @@ export const openStatistics = () => {
 export const pageDismissed = () => {
     return {
       type: MAINSCREEN_PAGE_DISMISSED,
+    };
+};
+
+export const radioButtonChanged = (value) => {
+    return {
+      type: MAINSCREEN_RADIOBUTTON_CHANGED,
+      payload: value,
+    };
+};
+
+export const titleChanged = (value) => {
+    return {
+      type: MAINSCREEN_TITLE_CHANGED,
+      payload: value,
     };
 };

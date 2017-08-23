@@ -4,18 +4,29 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  title: 'My survey',
-  type: 'internal'
+  id: '',
+  loading: false,
+  title: '',
+  type: '',
+  creationDate: '',
+  answers: {
+    sad: 0,
+    normal: 0,
+    happy: 0,
+  },
  };
 
 export default (state = INITIAL_STATE, action) => {
 
-  console.log('STATE: ', state);
-  console.log('ACTION', action);
+  //console.log('STATE: ', state);
+  //console.log('ACTION', action);
 
   switch (action.type) {
     case CREATE_SURVEY:
-      return { ...state, loading: true, error: '' };
+      return { ...state };
+    case CREATE_SURVEY_SUCCESS:
+      return { ...state, loading: false, error: '', id: action.payload };
+
     default:
       return state;
   }

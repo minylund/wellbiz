@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Image, Text, View, StyleSheet, Platform, Keyboard, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed, createSurvey } from '../actions';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed, createSurvey,
+radioButtonChanged, titleChanged } from '../actions';
 import { colorStyles, textStyles } from '../styles';
 import { typographyStyles } from '../styles/typography';
 import { Input, MainButton } from './common';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 var survey_type_props = [
   {label: 'Internal', value: 0 },
@@ -21,7 +22,18 @@ class MainScreen extends Component {
   };
 
   onCreateSurveyPress() {
-    this.props.createSurvey();
+
+    const callback = this.props.navigation.dispatch;
+    this.props.createSurvey(this.props.surveyTitle, this.props.surveyRadioButton, callback);
+  }
+
+
+  onRadioButtonChanged(value) {
+    this.props.radioButtonChanged(value);
+  }
+
+  onTitleChanged(value) {
+    this.props.titleChanged(value);
   }
 
   constructor(props) {
@@ -51,7 +63,7 @@ class MainScreen extends Component {
         style={styles.backButtonHolder}
         activeOpacity={0.5}
       >
-        <Image 
+        <Image
           source={require('../../assets/images/back-button.png')}
           style={styles.image}
         />
@@ -114,7 +126,7 @@ class MainScreen extends Component {
   // View for showing survey creation form
 
   renderNewSection(context) {
-    const { navigation } = this.props;
+    const { navigation, surveyRadioButton, surveyTitle } = this.props;
     return(
       <KeyboardAwareScrollView
         resetScrollToCoords={{ x: 0, y: 0 }}
@@ -131,7 +143,9 @@ class MainScreen extends Component {
           <Input
             placeholder={'Title'}
             onSubmitEditing={Keyboard.dismiss}
+            onChangeText={ this.onTitleChanged.bind(this) }
             returnKeyType={'done'}
+            value={surveyTitle}
           />
           <RadioForm
             radio_props={survey_type_props}
@@ -142,8 +156,8 @@ class MainScreen extends Component {
             style={styles.radioForm}
             buttonSize={40}
             buttonOuterSize={55}
-            initial={0}
-            onPress={(value) => {}}
+            initial={surveyRadioButton}
+            onPress={ this.onRadioButtonChanged.bind(this) }
           />
           <MainButton
             onPress={this.onCreateSurveyPress.bind(this)}>
@@ -221,6 +235,8 @@ class MainScreen extends Component {
   render() {
     console.log(this.props);
 
+
+
     // Render section based on current state
 
     if (this.props.showCreation) {
@@ -240,14 +256,33 @@ class MainScreen extends Component {
 }
 
 const mapStateToProps = ({ mainscreen }) => {
-  const { showCreation, showExisting, showStatistics, showInitial, error, survey, loading } = mainscreen;
-  return { showCreation,  showExisting, showStatistics, showInitial, error, survey, loading };
+  const {
+    showCreation,
+    showExisting,
+    showStatistics,
+    showInitial,
+    error,
+    survey,
+    loading,
+    surveyRadioButton,
+    surveyTitle
+        } = mainscreen;
+  return { showCreation,  showExisting, showStatistics, showInitial, error, survey, loading,
+    surveyRadioButton, surveyTitle };
 };
 
 let injectMainScreen = injectIntl(MainScreen);
 Object.assign(injectMainScreen, MainScreen);
 
-export default connect(mapStateToProps, { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed, createSurvey })(injectMainScreen);
+export default connect(mapStateToProps, {
+  newSurveyPressed, 
+  openExistingSurvey,
+  openStatistics,
+  pageDismissed,
+  createSurvey,
+  radioButtonChanged,
+  titleChanged
+ })(injectMainScreen);
 
 // STYLING
 const styles = StyleSheet.create({

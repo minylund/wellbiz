@@ -13,8 +13,13 @@ export const MAINSCREEN_SHOW_EXISTING_SURVEYS = 'mainscreen_show_existing_survey
 export const MAINSCREEN_SHOW_NEW_SURVEY = 'mainscreen_show_new_survey';
 export const MAINSCREEN_SHOW_STATISTICS = 'mainscreen_show_statistics';
 export const MAINSCREEN_PAGE_DISMISSED = 'mainscreen_page_dismissed';
+export const MAINSCREEN_RADIOBUTTON_CHANGED = 'mainscreen_radiobutton_changed';
+export const MAINSCREEN_TITLE_CHANGED = 'mainscreen_title_changed';
 
 export const CREATE_SURVEY_SUCCESS = 'create_survey_success';
 export const CREATE_SURVEY_FAIL = 'create_survey_fail';
 export const CREATE_SURVEY = 'create_survey';
 export const OPEN_SURVEY = 'open_survey';
+
+export const FETCH_SURVEY_SUCCESS = 'fetch_survey_success';
+export const UPDATE_SURVEY = 'update_survey';
