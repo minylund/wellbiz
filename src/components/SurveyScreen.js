@@ -115,6 +115,9 @@ class SurveyScreen extends Component {
           activeOpacity={1}
         ></TouchableOpacity>
         <View style={styles.mainHeadersHolder}>
+          <Text style={styles.titleStyle}>
+            Pizza and Beer 9/2017
+          </Text>
           <Text style={styles.headerStyle}>
             How are you feeling today?
           </Text>
@@ -155,8 +158,12 @@ const styles = StyleSheet.create({
   mainHeadersHolder: {
     alignItems: 'center',
     margin: 50,
-    paddingTop: 80,
     height: 50
+  },
+  titleStyle: {
+    ...textStyles.headerSmall,
+    textAlign: 'center',
+    lineHeight: 80,
   },
   headerStyle: {
     ...textStyles.headerBig,
