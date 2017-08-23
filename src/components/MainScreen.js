@@ -146,6 +146,7 @@ class MainScreen extends Component {
             onChangeText={ this.onTitleChanged.bind(this) }
             returnKeyType={'done'}
             value={surveyTitle}
+            clearButtonMode={'while-editing'}
           />
           <RadioForm
             radio_props={survey_type_props}
