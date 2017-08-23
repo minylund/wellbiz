@@ -11,16 +11,17 @@ $ git clone https://github.com/minylund/wellbiz.git
 $ cd wellbiz
 $ npm install
 ```
-After this you should run Expo XDE, open wellbiz project and run it on simulator or device by pressing **Device**.
+After this you should run Expo XDE, open wellbiz project and run it on simulator by pressing **Device** or on your device by pressing **Share** and using the QR code to open the app.
 
 Login credentials:
-User ID: joel+100@qvik.fi
+
+User ID: joel+100@qvik.fi  
 Password: qwerty
 
 ## Usage
 
-After logging in, you can view existing surveys or create a new one by providing a title and type. After survey is selected or created, you come to the survey view where the user can give his/her emotion.
-Survey answers are gathered to the Firebase database for further analysis.
+After logging in, you can view existing surveys or create a new one by providing its title and type. After survey is selected or created, you come to the survey view where the user can give his/her feedback on the current topic. Survey answers are gathered to the Firebase database for further analysis.
+
 You can get back to main menu by pressing the left top corner of the view and logging in again.
 
 ## License
