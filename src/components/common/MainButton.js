@@ -2,16 +2,17 @@ import React from 'react';
 import { TouchableOpacity, Text, Image, View } from 'react-native';
 import { colorStyles, textStyles } from '../../styles';
 
-const MainButton = ({ imagePath, onPress, children }) => {
+const MainButton = ({ imagePath, disabled, onPress, children }) => {
   const { buttonStyle, textStyle } = styles;
 
   return (
     <TouchableOpacity
+      disabled={disabled}
       onPress={onPress}
       style={buttonStyle}
       activeOpacity={0.5}
     >
-      <View style={styles.buttonHolder}>
+      <View style={[{opacity: disabled ? 0.6 : 1}, styles.buttonHolder]}>
         {imagePath != null &&
           <Image 
             source={imagePath}

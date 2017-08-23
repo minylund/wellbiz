@@ -121,7 +121,7 @@ class SurveyScreen extends Component {
   }
 
   render() {
-    console.log('ID OF SURVEY CREATED: ', this.props.navigation.state.params.surveyId);
+    console.log('ID OF SURVEY: ', this.props.navigation.state.params.surveyId);
     console.log('SURVEY DATA: ', this.props.surveyDatabase);
     return (
       <View style={styles.mainHolder}>
@@ -132,7 +132,7 @@ class SurveyScreen extends Component {
         ></TouchableOpacity>
         <View style={styles.mainHeadersHolder}>
           <Text style={styles.titleStyle}>
-            Pizza and Beer 9/2017
+            {this.props.surveyDatabase.title}
           </Text>
           <Text style={styles.headerStyle}>
             How are you feeling today?
@@ -167,19 +167,20 @@ const styles = StyleSheet.create({
     padding: 20
   },
   secretButton: {
-    width: 100,
-    height: 100,
-    backgroundColor: colorStyles.brand.primary
+    width: 50,
+    height: 50
   },
   mainHeadersHolder: {
     alignItems: 'center',
     margin: 50,
-    height: 50
+    height: 50,
+    paddingTop: 50,
   },
   titleStyle: {
     ...textStyles.headerSmall,
     textAlign: 'center',
     lineHeight: 80,
+    height: 80,
   },
   headerStyle: {
     ...textStyles.headerBig,
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingTop: 70
+    paddingTop: 120
   },
   emojiButtonHolder: {
     width: 150,

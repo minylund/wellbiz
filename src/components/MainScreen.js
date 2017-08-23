@@ -22,7 +22,7 @@ class MainScreen extends Component {
   };
 
   onCreateSurveyPress() {
-
+    this.setState({createDisabled: true});
     const callback = this.props.navigation.dispatch;
     this.props.createSurvey(this.props.surveyTitle, this.props.surveyRadioButton, callback);
   }
@@ -33,11 +33,13 @@ class MainScreen extends Component {
   }
 
   onTitleChanged(value) {
+    this.setState({createDisabled: (value === "")});
     this.props.titleChanged(value);
   }
 
   constructor(props) {
     super(props);
+    this.state = {createDisabled: true};
 
     this.formatMessage = this.props.intl.formatMessage.bind(this);
 
@@ -161,6 +163,7 @@ class MainScreen extends Component {
             onPress={ this.onRadioButtonChanged.bind(this) }
           />
           <MainButton
+            disabled={this.state.createDisabled}
             onPress={this.onCreateSurveyPress.bind(this)}>
             {context.formatMessage(
               {
