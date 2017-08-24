@@ -18,7 +18,8 @@ var survey_type_props = [
 
 class MainScreen extends Component {
   static navigationOptions = {
-    title: 'Main'
+    title: 'Main',
+    gesturesEnabled: false
   };
 
   onCreateSurveyPress() {

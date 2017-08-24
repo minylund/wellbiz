@@ -11,7 +11,8 @@ import * as Animatable from 'react-native-animatable';
 
 class SurveyScreen extends Component {
   static navigationOptions = {
-    title: 'Survey'
+    title: 'Survey',
+    gesturesEnabled: false
   };
 
   constructor(props) {
