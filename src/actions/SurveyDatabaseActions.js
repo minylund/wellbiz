@@ -22,7 +22,7 @@ export const fetchAllSurveys = () => {
 
 	return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/surveys/`)
-    .on('value', snapshot => {
+    .once('value', snapshot => {
       dispatch({ type: FETCH_ALL_SURVEYS_SUCCESS, payload: snapshot.val() });
     });
   };
