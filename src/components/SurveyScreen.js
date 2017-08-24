@@ -17,7 +17,7 @@ class SurveyScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {animating: false};
+    this.state = {animating: false, showQuote: false, quote: ""};
     this.formatMessage = this.props.intl.formatMessage.bind(this);
   }
 
@@ -33,12 +33,68 @@ class SurveyScreen extends Component {
     this.props.userLogout()
   }
 
+  animateQuote(emotion) {
+    var quotes = {
+      "sad": [
+        "Your feedback is highly appreciated!",
+        "We love you nevertheless <3",
+        "Dont give up!",
+        "You'll feel better tomorrow. I promise :)",
+        "Turn the pain into power!",
+        "When you feel sad, DANCE!",
+        "Love is all you need .. and food.",
+        "Smile! Come on, where's that smile?"
+      ],
+      "normal": [
+        "Your feedback is highly appreciated!",
+        "Have a nice day!",
+        "What's wrong? Grab a beer!",
+        "Hope to see you tomorrow!",
+        "Whats up? Looking good today!",
+        "Stay positive!",
+        "Life is short, eat dessert first.",
+        "Become your own best friend.",
+        "Set goals and dream big.",
+        "Too glam to give a damn."
+      ],
+      "happy": [
+        "Your feedback is highly appreciated!",
+        "Thank you!",
+        "Qvik loves you back <3",
+        "Keep up that awesomeness!",
+        "Thanks! See you later! :)",
+        "May the force be with you!",
+        "You're looking good today!",
+        "You have a beautiful smile.",
+        "You are pretty fucking awesome!",
+        "You’re a glitterbomb of glory!",
+      ]
+    };
+
+    var rand = Math.floor(Math.random() * quotes[emotion].length)
+
+    this.setState({quote: quotes[emotion][rand]});
+
+    this.setState({showQuote: true});
+    this.refs.quoteView.fadeIn(1500);
+    setTimeout( () => {
+      this.refs.quoteView.fadeOut(500);
+      setTimeout( () => {
+        this.setState({showQuote: false});
+        this.setState({animating: false});
+      }, 500
+      );
+    }, 3000
+    );
+  }
+
   onEmojiButtonPress(emojiId) {
     console.log(emojiId);
     if (this.state.animating) {
       return;
     }
 
+    this.animateQuote(emojiId);
 
     let updatedSurvey = { ...this.props.surveyDatabase };
 
@@ -50,7 +106,6 @@ class SurveyScreen extends Component {
         setTimeout( () => {
           this.refs.VideoRef_sad.pauseAsync();
           this.refs.VideoRef_sad.setPositionAsync(0);
-          this.setState({animating: false});
         },
           2000
         );
@@ -63,7 +118,6 @@ class SurveyScreen extends Component {
         setTimeout( () => {
           this.refs.VideoRef_normal.pauseAsync();
           this.refs.VideoRef_normal.setPositionAsync(0);
-          this.setState({animating: false});
         },
           2000
         );
@@ -76,7 +130,6 @@ class SurveyScreen extends Component {
         setTimeout( () => {
           this.refs.VideoRef_happy.pauseAsync();
           this.refs.VideoRef_happy.setPositionAsync(0);
-          this.setState({animating: false});
         },
           2000
         );
@@ -128,6 +181,16 @@ class SurveyScreen extends Component {
     );
   }
 
+  renderQuoteView() {
+    return (
+      <Animatable.View style={styles.thanksHolderStyle} ref="quoteView">
+        <Text style={[styles.thanksStyle, {opacity: this.state.showQuote ? 1 : 0}]}>
+          {this.state.quote}
+        </Text>
+      </Animatable.View>
+    )
+  }
+
   render() {
     console.log('ID OF SURVEY: ', this.props.navigation.state.params.surveyId);
     console.log('SURVEY DATA: ', this.props.surveyDatabase);
@@ -151,6 +214,7 @@ class SurveyScreen extends Component {
           {this.renderEmojiButton('normal')}
           {this.renderEmojiButton('happy')}
         </View>
+        {this.renderQuoteView()}
       </View>
     )
   }
@@ -211,5 +275,16 @@ const styles = StyleSheet.create({
   },
   emojiHighlight: {
     flex: 1
+  },
+  thanksHolderStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  thanksStyle: {
+    ...textStyles.headerSmall,
+    textAlign: 'center',
+    lineHeight: 65,
+    backgroundColor: 'transparent',
   }
 });
