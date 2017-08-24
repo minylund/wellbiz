@@ -1,5 +1,6 @@
 import {
   FETCH_SURVEY_SUCCESS,
+  FETCH_ALL_SURVEYS_SUCCESS,
   UPDATE_SURVEY
 } from '../actions/types';
 
@@ -19,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case FETCH_SURVEY_SUCCESS:
+      return action.payload;
+    case FETCH_ALL_SURVEYS_SUCCESS:
       return action.payload;
     case UPDATE_SURVEY:
       return { ...state };

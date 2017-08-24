@@ -6,7 +6,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { newSurveyPressed, openExistingSurvey, openStatistics, pageDismissed, createSurvey,
-radioButtonChanged, titleChanged } from '../actions';
+radioButtonChanged, titleChanged, fetchAllSurveys } from '../actions';
 import { colorStyles, textStyles } from '../styles';
 import { typographyStyles } from '../styles/typography';
 import { Input, MainButton } from './common';
@@ -37,6 +37,11 @@ class MainScreen extends Component {
     this.props.titleChanged(value);
   }
 
+  onOpenSurveyPress(id) {
+    const { navigation } = this.props;
+    navigation.navigate('Survey', {surveyId: id});
+  }
+
   constructor(props) {
     super(props);
     this.state = {createDisabled: true};
@@ -51,6 +56,7 @@ class MainScreen extends Component {
 
   componentWillMount() {
     this.props.pageDismissed();
+    this.props.fetchAllSurveys();
   }
 
   componentWillUnMount() {
@@ -76,6 +82,14 @@ class MainScreen extends Component {
   // View for showing list of existing surveys
 
   renderExistingSection(context) {
+    let listData = [];
+    for (var i in this.props.surveyDatabase) {
+      var date = new Date(this.props.surveyDatabase[i].creationDate);
+      var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' +  date.getFullYear()
+      listData.push({key: i, 
+              date: dateString, 
+              title: this.props.surveyDatabase[i].title});
+    }
     const { navigation } = this.props;
     return(
       <View style={styles.mainHolder}>
@@ -88,23 +102,13 @@ class MainScreen extends Component {
         <View style={styles.existingSurveysHolder}>
           <FlatList
             style={styles.flatList}
-            data={[
-              {key: '0', date: '25.8.2017', title: 'Pizza and beer'},
-              {key: '1', date: '1.7.2017', title: 'Qvik internal'},
-              {key: '2', date: '16.5.2017', title: 'IDxA Design'},
-              {key: '3', date: '13.4.2017', title: 'Pizza and beer'},
-              {key: '4', date: '21.3.2017', title: 'Pizza and beer'},
-              {key: '5', date: '1.7.2017', title: 'Qvik internal'},
-              {key: '6', date: '16.5.2017', title: 'IDxA Design'},
-              {key: '7', date: '13.4.2017', title: 'Pizza and beer'},
-              {key: '8', date: '21.3.2017', title: 'Pizza and beer'}
-            ]}
+            data={listData}
             renderItem={({item}) => (
             <View style={styles.listItem}>
               <Text style={styles.listItemDate}>{item.date}</Text>
               <Text style={styles.listItemTitle}>{item.title}</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('Survey')}
+                onPress={ this.onOpenSurveyPress.bind(this, item.key) }
                 style={styles.listItemButton}
                 activeOpacity={0.5}
               >
@@ -116,6 +120,7 @@ class MainScreen extends Component {
         </View>
       </View>
     );
+    // Statistics button hidden for now as its not yet functional :/
     /*<TouchableOpacity
       onPress={ () => this.props.openStatistics()}
       style={styles.listItemButton}
@@ -259,7 +264,7 @@ class MainScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ mainscreen }) => {
+const mapStateToProps = ({ mainscreen, surveyDatabase }) => {
   const {
     showCreation,
     showExisting,
@@ -271,8 +276,16 @@ const mapStateToProps = ({ mainscreen }) => {
     surveyRadioButton,
     surveyTitle
         } = mainscreen;
-  return { showCreation,  showExisting, showStatistics, showInitial, error, survey, loading,
-    surveyRadioButton, surveyTitle };
+  return { showCreation,
+    showExisting, 
+    showStatistics, 
+    showInitial, 
+    error, 
+    survey, 
+    loading,
+    surveyRadioButton, 
+    surveyTitle, 
+    surveyDatabase };
 };
 
 let injectMainScreen = injectIntl(MainScreen);
@@ -285,7 +298,8 @@ export default connect(mapStateToProps, {
   pageDismissed,
   createSurvey,
   radioButtonChanged,
-  titleChanged
+  titleChanged,
+  fetchAllSurveys
  })(injectMainScreen);
 
 // STYLING

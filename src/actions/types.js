@@ -23,3 +23,5 @@ export const OPEN_SURVEY = 'open_survey';
 
 export const FETCH_SURVEY_SUCCESS = 'fetch_survey_success';
 export const UPDATE_SURVEY = 'update_survey';
+
+export const FETCH_ALL_SURVEYS_SUCCESS = 'fetch_all_surveys_success';
