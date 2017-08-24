@@ -44,6 +44,11 @@ export const textStyles = {
       fontSize: 23,
       lineHeight: 70,
     },
+    statisticsText: {
+      ...typographyStyles.primaryFont,
+      color: colorStyles.text.gray,
+      fontSize: 40,
+    },
     error: {
       ...typographyStyles.secondaryFont,
       color: colorStyles.text.error,

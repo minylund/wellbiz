@@ -43,9 +43,14 @@ class MainScreen extends Component {
     navigation.navigate('Survey', {surveyId: id});
   }
 
+  onOpenStatisticsPress(survey) {
+    this.setState({selectedSurvey: survey});
+    this.props.openStatistics();
+  }
+
   constructor(props) {
     super(props);
-    this.state = {createDisabled: true};
+    this.state = {createDisabled: true, selectedSurvey: null};
 
     this.formatMessage = this.props.intl.formatMessage.bind(this);
 
@@ -86,7 +91,7 @@ class MainScreen extends Component {
     let listData = [];
     for (var i in this.props.surveyDatabase) {
       var date = new Date(this.props.surveyDatabase[i].creationDate);
-      var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' +  date.getFullYear()
+      var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' +  date.getFullYear();
       listData.push({key: i, 
               date: dateString, 
               title: this.props.surveyDatabase[i].title});
@@ -95,7 +100,7 @@ class MainScreen extends Component {
     return(
       <View style={styles.mainHolder}>
         {this.renderBackButton()}
-        <View style={styles.mainHeadersHolder}>
+        <View style={styles.subviewHeadersHolder}>
           <Text style={styles.headerStyle}>
             Old surveys
           </Text>
@@ -115,20 +120,19 @@ class MainScreen extends Component {
               >
                 <Text style={styles.listItemButtonText}>Open survey</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={ this.onOpenStatisticsPress.bind(this, this.props.surveyDatabase[item.key]) }
+                style={styles.listItemButton}
+                activeOpacity={0.5}
+              >
+                <Text style={styles.listItemButtonText}>Statistics</Text>
+              </TouchableOpacity>
             </View>
             )}
           />
         </View>
       </View>
     );
-    // Statistics button hidden for now as its not yet functional :/
-    /*<TouchableOpacity
-      onPress={ () => this.props.openStatistics()}
-      style={styles.listItemButton}
-      activeOpacity={0.5}
-    >
-      <Text style={styles.listItemButtonText}>Statistics</Text>
-    </TouchableOpacity>*/
   }
 
   // View for showing survey creation form
@@ -142,7 +146,7 @@ class MainScreen extends Component {
         scrollEnabled={false}
       >
         {this.renderBackButton()}
-        <View style={styles.mainHeadersHolder}>
+        <View style={styles.subviewHeadersHolder}>
           <Text style={styles.headerStyle}>
             Create a new survey
           </Text>
@@ -187,19 +191,110 @@ class MainScreen extends Component {
   // View for showing survey statistics
 
   renderStatisticsSection(context) {
-    const { navigation } = this.props;
+    console.log("SURVEY: ", this.state.selectedSurvey);
+
+    var date = new Date(this.state.selectedSurvey.creationDate);
+    var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' +  date.getFullYear();
+
+    var total = this.state.selectedSurvey.answerSad + 
+      this.state.selectedSurvey.answerNormal + 
+      this.state.selectedSurvey.answerHappy;
+
+    var percentSad = Math.round(this.state.selectedSurvey.answerSad / total * 100);
+    var percentNormal = Math.round(this.state.selectedSurvey.answerNormal / total * 100);
+    var percentHappy = Math.round(this.state.selectedSurvey.answerHappy / total * 100);
+
     return(
       <View style={styles.mainHolder}>
-        {this.renderBackButton()}
-        <View style={styles.mainHeadersHolder}>
+        <TouchableOpacity
+          onPress={ () => this.props.openExistingSurvey()}
+          style={styles.backButtonHolder}
+          activeOpacity={0.5}
+        >
+          <Image
+            source={require('../../assets/images/back-button.png')}
+            style={styles.image}
+          />
+        </TouchableOpacity>
+        <View style={styles.subviewHeadersHolder}>
+          <Text style={styles.statisticsTitleStyle}>
+            {dateString}   |   {this.state.selectedSurvey.title}
+          </Text>
           <Text style={styles.headerStyle}>
             Statistics
           </Text>
         </View>
-        <View style={styles.statisticsFormHolder}>
-          <Text >
-            Statistics here :)
-          </Text>
+        <View style={styles.statisticsHolder}>
+          <View style={styles.statisticsTopHolder}>
+            <View style={styles.statisticsTopColumn}>
+              <View style={[styles.statisticsTopBar, {height: percentSad * 2.5}]}>
+                <View style={styles.statisticsTopShadowBar}></View>
+              </View>
+              <Text style={styles.statisticsTopText}>
+                <Text>
+                  {percentSad}
+                </Text>
+                <Text style={{fontSize: 20}}>
+                  &nbsp;%
+                </Text>
+              </Text>
+            </View>
+            <View style={styles.statisticsTopColumn}>
+              <View style={[styles.statisticsTopBar, {height: percentNormal * 2.5}]}>
+                <View style={styles.statisticsTopShadowBar}></View>
+              </View>
+              <Text style={styles.statisticsTopText}>
+                <Text>
+                  {percentNormal}
+                </Text>
+                <Text style={{fontSize: 20}}>
+                  &nbsp;%
+                </Text>
+              </Text>
+            </View>
+            <View style={styles.statisticsTopColumn}>
+              <View style={[styles.statisticsTopBar, {height: percentHappy * 2.5}]}>
+                <View style={styles.statisticsTopShadowBar}></View>
+              </View>
+              <Text style={styles.statisticsTopText}>
+                <Text>
+                  {percentHappy}
+                </Text>
+                <Text style={{fontSize: 20}}>
+                  &nbsp;%
+                </Text>
+              </Text>
+            </View>
+          </View>
+          <View style={styles.statisticsBottomHolder}>
+            <View style={styles.statisticsBottomColumn}>
+              <Image
+                source={require('../../assets/images/sad_small.png')}
+                style={styles.statisticsBottomEmoji}
+              />
+              <Text style={styles.statisticsBottomText}>
+                {this.state.selectedSurvey.answerSad}
+              </Text>
+            </View>
+            <View style={styles.statisticsBottomColumn}>
+              <Image
+                source={require('../../assets/images/ok_small.png')}
+                style={styles.statisticsBottomEmoji}
+              />
+              <Text style={styles.statisticsBottomText}>
+                {this.state.selectedSurvey.answerNormal}
+              </Text>
+            </View>
+            <View style={styles.statisticsBottomColumn}>
+              <Image
+                source={require('../../assets/images/happy_small.png')}
+                style={styles.statisticsBottomEmoji}
+              />
+              <Text style={styles.statisticsBottomText}>
+                {this.state.selectedSurvey.answerHappy}
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     );
@@ -211,6 +306,7 @@ class MainScreen extends Component {
   renderInitialSection(context) {
     return(
       <View style={styles.mainHolder}>
+        <View style={styles.backButtonHolder}></View>
         <View style={styles.mainHeadersHolder}>
           <Text style={styles.headerStyle}>
             What would you like to do?
@@ -315,8 +411,14 @@ const styles = StyleSheet.create({
   mainHeadersHolder: {
     alignItems: 'center',
     margin: 50,
-    paddingTop: 80,
+    paddingTop: 50,
     height: 100
+  },
+  subviewHeadersHolder: {
+    alignItems: 'center',
+    margin: 50,
+    marginTop: 20,
+    height: 70
   },
   mainButtonsHolder: {
     flex: 1,
@@ -324,10 +426,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'flex-start',
     margin: 100,
+    marginTop: 50,
     paddingBottom: 150,
   },
   existingSurveysHolder: {
-    marginTop: 50,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -351,7 +453,7 @@ const styles = StyleSheet.create({
   },
   listItemTitle: {
     ...textStyles.listItem,
-    width: 560
+    width: 400
   },
   listItemButton: {
     width: 160,
@@ -365,11 +467,11 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   createFormHolder: {
+    marginTop: 20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 50
   },
   radioFormLabel: {
     ...textStyles.button,
@@ -379,17 +481,89 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 30
   },
-  statisticsFormHolder: {
-    marginTop: 50,
+  statisticsHolder: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'stretch',
   },
+  statisticsTopHolder: {
+    height: 250,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: colorStyles.border.dark,
+    marginLeft: 200,
+    marginRight: 200,
+  },
+  statisticsTopColumn: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 249,
+  },
+  statisticsTopBar: {
+    left: 15,
+    bottom: 0,
+    width: 120,
+    position: 'absolute',
+    overflow: 'hidden',
+    backgroundColor: colorStyles.brand.primary
+  },
+  statisticsTopShadowBar: {
+    left: 0,
+    bottom: 0,
+    width: 120,
+    height: 5,
+    position: 'absolute',
+    backgroundColor: colorStyles.brand.secondary
+  },
+  statisticsTopText: {
+    ...textStyles.statisticsText,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    lineHeight: 40,
+    marginTop: 150,
+    height: 40,
+    width: 150
+  },
+  statisticsBottomHolder: {
+    height: 160,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10
+  },
+  statisticsBottomColumn: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150
+  },
+  statisticsBottomEmoji: {
+    height: 75,
+    width: 75
+  },
+  statisticsBottomText: {
+    ...textStyles.statisticsText,
+    textAlign: 'center',
+    lineHeight: 70,
+    height: 70,
+    width: 150
+  },
   headerStyle: {
     ...textStyles.headerBig,
     textAlign: 'center',
     lineHeight: 65,
+  },
+  statisticsTitleStyle: {
+    ...textStyles.headerSmall,
+    textAlign: 'center',
+    lineHeight: 40,
+    height: 40,
+    marginBottom: 20
   },
   backButtonHolder: {
     marginTop: 10,
