@@ -25,59 +25,66 @@ class SurveyScreen extends Component {
     this.props.fetchSurvey(this.props.navigation.state.params.surveyId);
   }
 
+  onLogoutPress() {
+    if (this.state.animating) {
+      return;
+    }
+    this.props.userLogout()
+  }
+
   onEmojiButtonPress(emojiId) {
-      console.log(emojiId);
-      if (this.state.animating) {
-        return;
-      }
+    console.log(emojiId);
+    if (this.state.animating) {
+      return;
+    }
 
 
-      let updatedSurvey = { ...this.props.surveyDatabase };
+    let updatedSurvey = { ...this.props.surveyDatabase };
 
-      this.setState({animating: true});
-      switch (emojiId) {
-        case 'sad':
-          this.refs.HighlightRef_sad.tada(2000);
-          this.refs.VideoRef_sad.playAsync();
-          setTimeout( () => {
-            this.refs.VideoRef_sad.pauseAsync();
-            this.refs.VideoRef_sad.setPositionAsync(0);
-            this.setState({animating: false});
-          },
-            2000
-          );
-          updatedSurvey.answerSad++;
-          this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
-          break;
-        case 'normal':
-          this.refs.HighlightRef_normal.pulse(2000);
-          this.refs.VideoRef_normal.playAsync();
-          setTimeout( () => {
-            this.refs.VideoRef_normal.pauseAsync();
-            this.refs.VideoRef_normal.setPositionAsync(0);
-            this.setState({animating: false});
-          },
-            2000
-          );
-          updatedSurvey.answerNormal++;
-          this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
-          break;
-        case 'happy':
-          this.refs.HighlightRef_happy.swing(2000);
-          this.refs.VideoRef_happy.playAsync();
-          setTimeout( () => {
-            this.refs.VideoRef_happy.pauseAsync();
-            this.refs.VideoRef_happy.setPositionAsync(0);
-            this.setState({animating: false});
-          },
-            2000
-          );
-          updatedSurvey.answerHappy++;
-          this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
-          break;
-        default:
-          return
-      }
+    this.setState({animating: true});
+    switch (emojiId) {
+      case 'sad':
+        this.refs.HighlightRef_sad.tada(2000);
+        this.refs.VideoRef_sad.playAsync();
+        setTimeout( () => {
+          this.refs.VideoRef_sad.pauseAsync();
+          this.refs.VideoRef_sad.setPositionAsync(0);
+          this.setState({animating: false});
+        },
+          2000
+        );
+        updatedSurvey.answerSad++;
+        this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
+        break;
+      case 'normal':
+        this.refs.HighlightRef_normal.pulse(2000);
+        this.refs.VideoRef_normal.playAsync();
+        setTimeout( () => {
+          this.refs.VideoRef_normal.pauseAsync();
+          this.refs.VideoRef_normal.setPositionAsync(0);
+          this.setState({animating: false});
+        },
+          2000
+        );
+        updatedSurvey.answerNormal++;
+        this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
+        break;
+      case 'happy':
+        this.refs.HighlightRef_happy.swing(2000);
+        this.refs.VideoRef_happy.playAsync();
+        setTimeout( () => {
+          this.refs.VideoRef_happy.pauseAsync();
+          this.refs.VideoRef_happy.setPositionAsync(0);
+          this.setState({animating: false});
+        },
+          2000
+        );
+        updatedSurvey.answerHappy++;
+        this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
+        break;
+      default:
+        return
+    }
   }
 
   renderEmojiButton(emojiId) {
@@ -126,7 +133,7 @@ class SurveyScreen extends Component {
     return (
       <View style={styles.mainHolder}>
         <TouchableOpacity
-          onPress={ () => this.props.userLogout()}
+          onPress={this.onLogoutPress.bind(this)}
           style={styles.secretButton}
           activeOpacity={1}
         ></TouchableOpacity>
