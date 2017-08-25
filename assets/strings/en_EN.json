@@ -2,7 +2,7 @@
   "login.label": "LOGIN",
   "logout.label": "Logout",
   "main.label": "Menu",
-  "oldSurveys.button.label": "View old surveys",
+  "oldSurveys.button.label": "View surveys",
   "createSurvey.button.label": "Create a new survey",
   "createSurveyCreate.button.label": "Create",
 }

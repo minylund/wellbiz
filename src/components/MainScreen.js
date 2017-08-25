@@ -102,7 +102,7 @@ class MainScreen extends Component {
         {this.renderBackButton()}
         <View style={styles.subviewHeadersHolder}>
           <Text style={styles.headerStyle}>
-            Old surveys
+            Surveys
           </Text>
         </View>
         <View style={styles.existingSurveysHolder}>
@@ -125,7 +125,7 @@ class MainScreen extends Component {
                 style={styles.listItemButton}
                 activeOpacity={0.5}
               >
-                <Text style={styles.listItemButtonText}>Statistics</Text>
+                <Text style={styles.listItemButtonText}>Results</Text>
               </TouchableOpacity>
             </View>
             )}
@@ -221,7 +221,7 @@ class MainScreen extends Component {
             {dateString}   |   {this.state.selectedSurvey.title}
           </Text>
           <Text style={styles.headerStyle}>
-            Statistics
+            Results
           </Text>
         </View>
         <View style={styles.statisticsHolder}>
@@ -319,7 +319,7 @@ class MainScreen extends Component {
             {context.formatMessage(
               {
                 id: "oldSurveys.button.label",
-                defaultMessage: "View old surveys"
+                defaultMessage: "View surveys"
               })
             }
           </MainButton>

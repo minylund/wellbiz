@@ -43,7 +43,9 @@ class SurveyScreen extends Component {
         "Turn the pain into power!",
         "When you feel sad, DANCE!",
         "Love is all you need .. and food.",
-        "Smile! Come on, where's that smile?"
+        "Smile! Come on, where's that smile?",
+        "Cheer up! Things could be worse.",
+        "Life is too short for us to dwell on sadness."
       ],
       "normal": [
         "Your feedback is highly appreciated!",
@@ -55,7 +57,8 @@ class SurveyScreen extends Component {
         "Life is short, eat dessert first.",
         "Become your own best friend.",
         "Set goals and dream big.",
-        "Too glam to give a damn."
+        "Too glam to give a damn.",
+        "Have a good day!"
       ],
       "happy": [
         "Your feedback is highly appreciated!",
