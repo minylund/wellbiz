@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import { userLogout, fetchSurvey, updateAnswers } from '../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
-import { Video } from 'expo';
+import { Video, Audio } from 'expo';
 import * as Animatable from 'react-native-animatable';
 
 class SurveyScreen extends Component {
@@ -91,6 +91,17 @@ class SurveyScreen extends Component {
     );
   }
 
+  async playSound() {
+    const soundObject = new Expo.Audio.Sound();
+    try {
+      await soundObject.loadAsync(require('../../assets/sounds/button.mp3'));
+      await soundObject.playAsync();
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+    }
+  }
+
   onEmojiButtonPress(emojiId) {
     console.log(emojiId);
     if (this.state.animating) {
@@ -98,6 +109,8 @@ class SurveyScreen extends Component {
     }
 
     this.animateQuote(emojiId);
+
+    this.playSound();
 
     let updatedSurvey = { ...this.props.surveyDatabase };
 
