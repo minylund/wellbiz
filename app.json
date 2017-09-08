@@ -8,6 +8,7 @@
     "version": "0.0.1",
     "orientation": "landscape",
     "primaryColor": "#cccccc",
+    "privacy": "unlisted",
     "icon": "./assets/icons/app-icon.png",
     "loading": {
       "icon": "./assets/icons/loading-icon.png",

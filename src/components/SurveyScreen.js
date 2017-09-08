@@ -9,6 +9,8 @@ import { colorStyles, textStyles } from '../styles';
 import { Video, Audio } from 'expo';
 import * as Animatable from 'react-native-animatable';
 
+var LOGOUT_TIMER = 3000;
+
 class SurveyScreen extends Component {
   static navigationOptions = {
     title: 'Survey',
@@ -19,6 +21,8 @@ class SurveyScreen extends Component {
     super(props);
     this.state = {animating: false, showQuote: false, quote: ""};
     this.formatMessage = this.props.intl.formatMessage.bind(this);
+
+    this.timer = null;
   }
 
 
@@ -26,11 +30,20 @@ class SurveyScreen extends Component {
     this.props.fetchSurvey(this.props.navigation.state.params.surveyId);
   }
 
-  onLogoutPress() {
+  logout() {
     if (this.state.animating) {
       return;
     }
-    this.props.userLogout()
+    this.props.userLogout();
+    console.log("logout");
+  }
+
+  onLogoutPressIn() {
+    this.timer = setTimeout(this.logout.bind(this), LOGOUT_TIMER);
+  }
+
+  onLogoutPressOut() {
+    clearTimeout(this.timer);
   }
 
   animateQuote(emotion) {
@@ -213,7 +226,8 @@ class SurveyScreen extends Component {
     return (
       <View style={styles.mainHolder}>
         <TouchableOpacity
-          onPress={this.onLogoutPress.bind(this)}
+          onPressIn={this.onLogoutPressIn.bind(this)}
+          onPressOut={this.onLogoutPressOut.bind(this)}
           style={styles.secretButton}
           activeOpacity={1}
         ></TouchableOpacity>
