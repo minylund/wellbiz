@@ -1,16 +1,14 @@
 import {
   FETCH_SURVEY_SUCCESS,
   FETCH_ALL_SURVEYS_SUCCESS,
-  UPDATE_SURVEY
+  ADD_ANSWER
 } from '../actions/types';
 
 const INITIAL_STATE = {
   title: '',
   type: '',
   creationDate: '',
-  answerHappy: 0,
-  answerNormal: 0,
-  answerSad: 0,
+  answers: []
  };
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
       return action.payload;
     case FETCH_ALL_SURVEYS_SUCCESS:
       return action.payload;
-    case UPDATE_SURVEY:
+    case ADD_ANSWER:
       return { ...state };
 
     default:

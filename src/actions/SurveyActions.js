@@ -16,14 +16,11 @@ import {
 
 		const type = internal === 0 ? 'internal' : 'external';
 		const creationDate = new Date().toISOString();
-		const answerSad = 0;
-		const answerNormal = 0;
-		const answerHappy = 0;
 
 		console.log(creationDate);
 
   	firebase.database().ref(`/users/${currentUser.uid}/surveys`)
-  		.push({ title, type, creationDate, answerSad, answerNormal, answerHappy })
+  		.push({ title, type, creationDate })
   		.then((survey) => createSurveySuccess(dispatch, survey, callback))
       .catch((error) => createSurveyFail(dispatch, error));
   };

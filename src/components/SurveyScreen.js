@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Image, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import { userLogout, fetchSurvey, updateAnswers } from '../actions';
+import { userLogout, fetchSurvey, addAnswer } from '../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { colorStyles, textStyles } from '../styles';
 import { Video, Audio } from 'expo';
@@ -125,8 +125,6 @@ class SurveyScreen extends Component {
 
     this.playSound();
 
-    let updatedSurvey = { ...this.props.surveyDatabase };
-
     this.setState({animating: true});
     switch (emojiId) {
       case 'sad':
@@ -138,8 +136,7 @@ class SurveyScreen extends Component {
         },
           2000
         );
-        updatedSurvey.answerSad++;
-        this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
+        this.props.addAnswer(this.props.navigation.state.params.surveyId, "sad");
         break;
       case 'normal':
         this.refs.HighlightRef_normal.pulse(2000);
@@ -150,8 +147,7 @@ class SurveyScreen extends Component {
         },
           2000
         );
-        updatedSurvey.answerNormal++;
-        this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
+        this.props.addAnswer(this.props.navigation.state.params.surveyId, "normal");
         break;
       case 'happy':
         this.refs.HighlightRef_happy.swing(2000);
@@ -162,8 +158,7 @@ class SurveyScreen extends Component {
         },
           2000
         );
-        updatedSurvey.answerHappy++;
-        this.props.updateAnswers(updatedSurvey, this.props.navigation.state.params.surveyId);
+        this.props.addAnswer(this.props.navigation.state.params.surveyId, "happy");
         break;
       default:
         return
@@ -258,7 +253,7 @@ const mapStateToProps = ({ mainscreen, surveyDatabase }) => {
 let injectSurveyScreen = injectIntl(SurveyScreen);
 Object.assign(injectSurveyScreen, SurveyScreen);
 
-export default connect(mapStateToProps, { userLogout, fetchSurvey, updateAnswers })(injectSurveyScreen);
+export default connect(mapStateToProps, { userLogout, fetchSurvey, addAnswer })(injectSurveyScreen);
 
 // STYLING
 const styles = StyleSheet.create({

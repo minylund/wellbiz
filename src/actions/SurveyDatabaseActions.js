@@ -2,7 +2,6 @@ import firebase from 'firebase';
 
 import {
 	FETCH_SURVEY_SUCCESS,
-	UPDATE_SURVEY,
 	FETCH_ALL_SURVEYS_SUCCESS,
 } from './types';
 
@@ -28,10 +27,17 @@ export const fetchAllSurveys = () => {
   };
 };
 
-export const updateAnswers = (survey, id) => {
- const { currentUser } = firebase.auth();
+export const addAnswer = (surveyId, value) => {
+  const { currentUser } = firebase.auth();
 
- return (dispatch) => {
-   firebase.database().ref(`/users/${currentUser.uid}/surveys/${id}`).set(survey);
- };
+  return (dispatch) => {
+
+    const timeStamp = new Date().toISOString();
+
+    console.log("ADD ANSWER");
+    console.log(timeStamp);
+
+    firebase.database().ref(`/users/${currentUser.uid}/surveys/${surveyId}/answers`)
+      .push({ value, timeStamp });
+  };
 };

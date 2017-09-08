@@ -96,6 +96,7 @@ class MainScreen extends Component {
               date: dateString, 
               title: this.props.surveyDatabase[i].title});
     }
+    listData.reverse();
     const { navigation } = this.props;
     return(
       <View style={styles.mainHolder}>
@@ -196,13 +197,35 @@ class MainScreen extends Component {
     var date = new Date(this.state.selectedSurvey.creationDate);
     var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' +  date.getFullYear();
 
-    var total = this.state.selectedSurvey.answerSad + 
-      this.state.selectedSurvey.answerNormal + 
-      this.state.selectedSurvey.answerHappy;
+    var countSad = 0;
+    var countNormal = 0;
+    var countHappy = 0;
+    for (var i in this.state.selectedSurvey.answers) {
+      var answer = this.state.selectedSurvey.answers[i];
+      console.log("ANSWER: ", answer);
+      switch (answer.value) {
+        case 'sad':
+          countSad++;
+          break;
+        case 'normal':
+          countNormal++;
+          break;
+        case 'happy':
+          countHappy++;
+          break;
+        default:
+          break;
+      }
+    }
+    var total = countSad + countNormal + countHappy;
 
-    var percentSad = Math.round(this.state.selectedSurvey.answerSad / total * 100);
-    var percentNormal = Math.round(this.state.selectedSurvey.answerNormal / total * 100);
-    var percentHappy = Math.round(this.state.selectedSurvey.answerHappy / total * 100);
+    var percentSad = Math.round(countSad / total * 100);
+    var percentNormal = Math.round(countNormal / total * 100);
+    var percentHappy = Math.round(countHappy / total * 100);
+
+    percentSad = percentSad % 1 === 0 ? percentSad : 0
+    percentNormal = percentNormal % 1 === 0 ? percentNormal : 0
+    percentHappy = percentHappy % 1 === 0 ? percentHappy : 0
 
     return(
       <View style={styles.mainHolder}>
@@ -273,7 +296,7 @@ class MainScreen extends Component {
                 style={styles.statisticsBottomEmoji}
               />
               <Text style={styles.statisticsBottomText}>
-                {this.state.selectedSurvey.answerSad}
+                {countSad}
               </Text>
             </View>
             <View style={styles.statisticsBottomColumn}>
@@ -282,7 +305,7 @@ class MainScreen extends Component {
                 style={styles.statisticsBottomEmoji}
               />
               <Text style={styles.statisticsBottomText}>
-                {this.state.selectedSurvey.answerNormal}
+                {countNormal}
               </Text>
             </View>
             <View style={styles.statisticsBottomColumn}>
@@ -291,7 +314,7 @@ class MainScreen extends Component {
                 style={styles.statisticsBottomEmoji}
               />
               <Text style={styles.statisticsBottomText}>
-                {this.state.selectedSurvey.answerHappy}
+                {countHappy}
               </Text>
             </View>
           </View>
