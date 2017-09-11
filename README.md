@@ -13,12 +13,12 @@ $ npm install
 ```
 After this you should run Expo XDE, login with your Expo account, open wellbiz project and run it on simulator by pressing **Device** or on your device by pressing **Share** and using the QR code to open the app.
 
-Login credentials:
+## Usage
+
+Login with these credentials:
 
 User ID: joel+100@qvik.fi  
 Password: qwerty
-
-## Usage
 
 After logging in, you can view existing surveys or create a new one by providing its title and type. After survey is created, or opened from the survey list, you come to the survey view where the user can give his/her feedback on the current topic. You can get back to main menu by pressing and holding the left top corner of the view and logging in again.
 
