@@ -20,9 +20,9 @@ Password: qwerty
 
 ## Usage
 
-After logging in, you can view existing surveys or create a new one by providing its title and type. After survey is created, or opened from the survey list, you come to the survey view where the user can give his/her feedback on the current topic. You can get back to main menu by pressing the left top corner of the view and logging in again.
+After logging in, you can view existing surveys or create a new one by providing its title and type. After survey is created, or opened from the survey list, you come to the survey view where the user can give his/her feedback on the current topic. You can get back to main menu by pressing and holding the left top corner of the view and logging in again.
 
-Survey answers are gathered to the Firebase database for further analysis. Statistics for each survey can also be viewed from the survey list by pressing **Statistics**. 
+Survey answers are gathered to the Firebase database for further analysis. Results for each survey can also be viewed from the survey list by pressing **Results**. 
 
 ## License
 
