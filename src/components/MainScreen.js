@@ -111,24 +111,22 @@ class MainScreen extends Component {
             style={styles.flatList}
             data={listData}
             renderItem={({item}) => (
-            <View style={styles.listItem}>
-              <Text style={styles.listItemDate}>{item.date}</Text>
-              <Text style={styles.listItemTitle}>{item.title}</Text>
-              <TouchableOpacity
-                onPress={ this.onOpenSurveyPress.bind(this, item.key) }
-                style={styles.listItemButton}
-                activeOpacity={0.5}
-              >
-                <Text style={styles.listItemButtonText}>Open survey</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={ this.onOpenStatisticsPress.bind(this, this.props.surveyDatabase[item.key]) }
-                style={styles.listItemButton}
-                activeOpacity={0.5}
-              >
-                <Text style={styles.listItemButtonText}>Results</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              onPress={ this.onOpenSurveyPress.bind(this, item.key) }
+              activeOpacity={0.5}
+            >
+              <View style={styles.listItem}>
+                <Text style={styles.listItemDate}>{item.date}</Text>
+                <Text style={styles.listItemTitle}>{item.title}</Text>
+                <TouchableOpacity
+                  onPress={ this.onOpenStatisticsPress.bind(this, this.props.surveyDatabase[item.key]) }
+                  style={styles.listItemButton}
+                  activeOpacity={0.5}
+                >
+                  <Text style={styles.listItemButtonText}>Results</Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
             )}
           />
         </View>
@@ -476,7 +474,7 @@ const styles = StyleSheet.create({
   },
   listItemTitle: {
     ...textStyles.listItem,
-    width: 400
+    width: 560
   },
   listItemButton: {
     width: 160,
