@@ -47,6 +47,35 @@ class SurveyScreen extends Component {
   }
 
   animateQuote(emotion) {
+    /*var quotes = {
+      "sad": [
+        "Vielen dank für deine Rückmeldung!",
+        "Prost!",
+        "Gib nicht auf!",
+        "Wir lieben dich doch <3",
+        "Genieße das Leben ständig!",
+        "Wo ist dein bier?",
+        "Haben Sie eine Brezel."
+      ],
+      "normal": [
+        "Vielen dank für deine Rückmeldung!",
+        "Prost!",
+        "Positiv bleiben!",
+        "Welches Beir haben Sie?",
+        "Genieße das Leben ständig!",
+        "Wo ist dein bier?",
+        "Liawa bsuffa und lusdig, ois nichdan und bläd."
+      ],
+      "happy": [
+        "Vielen dank für deine Rückmeldung!",
+        "Oans, zwoa, g’suffa!",
+        "Prost!",
+        "Du bist ein Glitterbombe der Herrlichkeit!",
+        "Zum Wohl!",
+        "Du siehst heute toll aus!",
+        "Fantastisch! Bitte noch ein bier!"
+      ]
+    }*/
     var quotes = {
       "sad": [
         "Your feedback is highly appreciated!",
@@ -107,7 +136,7 @@ class SurveyScreen extends Component {
   async playSound() {
     const soundObject = new Expo.Audio.Sound();
     try {
-      await soundObject.loadAsync(require('../../assets/sounds/button.mp3'));
+      await soundObject.loadAsync(require('../../assets/sounds/oktoberfest-beer.mp3'));
       await soundObject.playAsync();
       // Your sound is playing!
     } catch (error) {
